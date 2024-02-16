@@ -102,4 +102,19 @@ public class Grafo {
          JOptionPane.showMessageDialog(null, "No se puede agregar la arista");
         }
     }
+    
+    public Vertice get(int ciudad) {
+        if (isEmpty()) {
+            return null;
+        } else {
+            for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
+                Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
+                if (vertex.getNumeroCiudad() == ciudad) {
+                    return vertex;
+                }
+            }
+            return null;
+        }
+    }
+    
 }
