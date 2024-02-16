@@ -18,11 +18,14 @@ public class SistemaHormiga {
     
     public double inicializarFeromonas(Grafo grafo) {
         // Inicializar la variable feromonas
-        setFeromonas(1.0);
+        setFeromonas(0.0);
         int numCiudades = grafo.getVertices();
-        double cantidadInicial = getFeromonas() / numCiudades; // Calcular la cantidad inicial de feromonas
-        return cantidadInicial;
+        double feromonas = 1 / numCiudades; // Calcular la cantidad inicial de feromonas
+        return feromonas;
     }
+    
+    
+    
 
     /**
      * @return the feromonas

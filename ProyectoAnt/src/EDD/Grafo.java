@@ -103,18 +103,5 @@ public class Grafo {
         }
     }
     
-    public Vertice get(int ciudad) {
-        if (isEmpty()) {
-            return null;
-        } else {
-            for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
-                Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
-                if (vertex.getNumeroCiudad() == ciudad) {
-                    return vertex;
-                }
-            }
-            return null;
-        }
-    }
     
 }
