@@ -6,7 +6,7 @@ package Interfaces;
 
 /**
  *
- * @author nicolepinto
+ * @author Camila Garcia
  */
 public class Mostrar extends javax.swing.JFrame {
 
