@@ -6,7 +6,7 @@ package Interfaces;
 
 /**
  *
- * @author nicolepinto
+ * @author Camila Garcia
  */
 public class CargarTXT extends javax.swing.JFrame {
 

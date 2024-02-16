@@ -6,7 +6,7 @@ package Interfaces;
 
 /**
  *
- * @author nicolepinto
+ * @author Camila Garcia
  */
 public class Simular extends javax.swing.JFrame {
 

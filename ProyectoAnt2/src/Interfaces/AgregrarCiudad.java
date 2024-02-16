@@ -6,7 +6,7 @@ package Interfaces;
 
 /**
  *
- * @author nicolepinto
+ * @author Camila Garcia
  */
 public class AgregrarCiudad extends javax.swing.JFrame {
 

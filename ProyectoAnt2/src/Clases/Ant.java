@@ -1,40 +1,47 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Clases;
 
 import EDD.Lista;
+import EDD.Vertice;
 
 /**
  *
- * @author nicolepinto
+ * @author Camila Garcia
  */
 public class Ant {
+    private Vertice ciudadActual;
+    private Vertice ciudadesRecorridas;
+    private double longitud;
+
+    public Ant(Vertice ciudadActual, Vertice ciudadesRecorridas) {
+        this.ciudadActual = ciudadActual;
+        this.ciudadesRecorridas = ciudadesRecorridas;
+        this.longitud = 0;
+    }
+
+    public Vertice getCiudadActual() {
+        return ciudadActual;
+    }
+
+    public void setCiudadActual(Vertice ciudadActual) {
+        this.ciudadActual = ciudadActual;
+    }
+
+    public Vertice getCiudadesRecorridas() {
+        return ciudadesRecorridas;
+    }
+
+    public void setCiudadesRecorridas(Vertice ciudadesRecorridas) {
+        this.ciudadesRecorridas = ciudadesRecorridas;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
     
-    private Lista CiudadesVisitadas;
-    private int caminoRecorrido;
-
-    public Ant(Lista CiudadesVisitadas, int caminoRecorrido) {
-        this.CiudadesVisitadas = CiudadesVisitadas;
-        this.caminoRecorrido = caminoRecorrido;
-    }
-
-    public Lista getCiudadesVisitadas() {
-        return CiudadesVisitadas;
-    }
-
-    public void setCiudadesVisitadas(Lista CiudadesVisitadas) {
-        this.CiudadesVisitadas = CiudadesVisitadas;
-    }
-
-    public int getCaminoRecorrido() {
-        return caminoRecorrido;
-    }
-
-    public void setCaminoRecorrido(int caminoRecorrido) {
-        this.caminoRecorrido = caminoRecorrido;
-    }
-    
-    //Primitiva 
-}
+ 
+}  
