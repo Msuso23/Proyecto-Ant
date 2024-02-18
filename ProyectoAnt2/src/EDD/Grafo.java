@@ -1,107 +1,112 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package EDD;
 
-import javax.swing.JOptionPane;
+import Clases.Ant;
 
 /**
  *
  * @author nicolepinto
+ * @author Camila Garcia
  */
 public class Grafo {
-    
-    private int vertices;
-    private Lista ListaCiudades;
-
-    public Grafo(int vertices, Lista ListaCiudades) {
-        this.vertices = vertices;
-        this.ListaCiudades = ListaCiudades;
-    }
-
-    public int getVertices() {
-        return vertices;
-    }
-
-    public void setVertices(int vertices) {
-        this.vertices = vertices;
-    }
-
-    public Lista getListaCiudades() {
-        return ListaCiudades;
-    }
-
-    public void setListaCiudades(Lista ListaCiudades) {
-        this.ListaCiudades = ListaCiudades;
-    }
-    
-    public boolean isEmpty() {
-        return ListaCiudades.getSize()== 0;
-    }
+    private MatrizAdyacente matrizady;
+    private Lista ciudades;
+    private int size;
     
     
-    // Se utiliza para verificar si un vértice con un número de ciudad específico existe en el grafo.
-    public boolean isVertex(int ciudad) {
-        if (isEmpty()) {
-            return false;
-        } else {
-            for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
-                Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
-                if (vertex.getNumeroCiudad() == ciudad) {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
-    public void agregarVertice(int ciudad) {
-        if (!isVertex(ciudad)) {
-            Vertice Vertex = new Vertice(ciudad, null);
-            ListaCiudades.InsertarFinal(Vertex);
-        } else {
-            JOptionPane.showMessageDialog(null, "Error.");
-        }
-    }
-            
-    public void eliminarVertice(int ciudad) {
-        if (isEmpty()) {
-            System.out.println("El grafo está vacío. No hay vértices que eliminar.");
-        } else if (isVertex(ciudad)) {
-            for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
-                Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
-                if (vertex.getNumeroCiudad() == ciudad) {
-                    ListaCiudades.eliminarPosicion(indice);
-                    JOptionPane.showMessageDialog(null, "Vértice " + ciudad + " eliminado.");
-                    return;
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, " El Vértice " + ciudad + " no existe en el grafo.");
-        }
-}
-    //Verifica si existe un vértice con el número de ciudad especificado en la lista de adyacencia proporcionada.
-    public boolean existeVertice(Lista list_ady, int NumeroCiudad) {
-        for (int i = 0; i < list_ady.getSize(); i++) {
-            Vertice v = (Vertice) list_ady.getValor(i);
-            if (v.getNumeroCiudad() == NumeroCiudad) {
-                return true;
-            }
-        }
-        return false;
+    //Constructor
+    public Grafo(MatrizAdyacente matrizady) {
+        this.matrizady = matrizady;
+        this.ciudades = null;
+        this.size = 0;
     }
     
-    //Agregar una arista dado dos vertices y su distancia 
+    public Grafo(){
+    }
         
-    public void agregar(Vertice ciudadInicio, Vertice ciudadDestino, double distancia){
-        Arista arista = new Arista(ciudadInicio, ciudadDestino, distancia);
-        if (isVertex(ciudadInicio.getNumeroCiudad()) && isVertex(ciudadDestino.getNumeroCiudad())) {
-            ciudadInicio.getList_ady().InsertarFinal(arista);
-        } else {
-         JOptionPane.showMessageDialog(null, "No se puede agregar la arista");
-        }
+    
+    //Getters y Setters
+
+    public MatrizAdyacente getMatrizady() {
+        return matrizady;
+    }
+
+    public void setMatrizady(MatrizAdyacente matrizady) {
+        this.matrizady = matrizady;
+    }
+
+    public Lista getCiudades() {
+        return ciudades;
+    }
+
+    public void setCiudades(Lista ciudades) {
+        this.ciudades = ciudades;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
     
     
+    //Este metodo crea una nueva Ciudad
+    public void crearCiudad(Object num){
+        Ciudades ciudad= new Ciudades(num,null);
+        if(ciudades.isEmpty()){
+            ciudades.agregarInicio(ciudad);
+        }else{
+            ciudades.InsertarFinal(ciudad);
+        }
+        size++;
+    }
+    
+    //Metodo para crear nueva hormiga
+    public Ant hormiga(Object name){
+        Ant hormiga= new Ant (name);
+        return hormiga;
+    }
+    
+    //Metodo que retorna el primer nodo del grafo
+    public Nodo getFirstNodo(){
+        return getCiudades().getpFirst();
+    }
+    
+    //Metodo que retorna el numero de Ciudades
+    public int getCiudadesNumero(){
+        int num=0;
+        for (int i = 0; i < ciudades.getSize(); i++) {
+             num++;
+        }
+        return num;
+    }
+    
+    //Metodo que retorna un string array con el nombre de todas las ciudades
+    public String[] nombreEnString(){
+        String [] cadena;
+        cadena= new String[size];
+        for (int i = 0; i < size; i++) {
+            cadena[i]=(String) ciudades.getCiudadNodoporIndice(i).getDato();
+        }
+        return cadena;
+    }
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
 }
+
+
+  
