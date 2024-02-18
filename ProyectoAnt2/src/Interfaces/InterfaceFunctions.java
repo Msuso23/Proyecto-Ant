@@ -1,5 +1,8 @@
 
 package Interfaces;
+
+import EDD.Grafo;
+
 /**
  *
  * @author Camila Garcia
@@ -15,6 +18,16 @@ public class InterfaceFunctions {
     private static final Simular simulacion = new Simular();
     private static final Mostrar mostragrafo = new Mostrar();
     private static final Guardar guardartxt= new Guardar();
+    private static Grafo grafo= new Grafo();
+
+    public static Grafo getGrafo() {
+        return grafo;
+    }
+
+    public static void setGrafo(Grafo grafo) {
+        InterfaceFunctions.grafo = grafo;
+    }
+    
    
     //Metodo para que la clase de interfaz Bienvenida sea visible al llamar el metodo
     public static void openBienvenida(){
