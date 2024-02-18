@@ -72,7 +72,7 @@ public class Grafo {
             for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
                 Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
                 if (vertex.getNumeroCiudad() == ciudad) {
-                    ListaCiudades.EliminarPorPosicion(indice);
+                    ListaCiudades.eliminarPosicion(indice);
                     JOptionPane.showMessageDialog(null, "Vértice " + ciudad + " eliminado.");
                     return;
                 }

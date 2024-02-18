@@ -6,7 +6,7 @@ package Funciones;
 
 /**
  *
- * @author nicolepinto
+ * @author Camila Garcia
  */
 public class Helpers {
     

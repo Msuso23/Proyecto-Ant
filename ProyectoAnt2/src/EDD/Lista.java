@@ -47,7 +47,7 @@ public class Lista {
         this.size = 0;   
     }
 
-    public void insertarFinal(Object dato){
+    public void InsertarFinal(Object dato){
         Nodo pNew = new Nodo(dato);
         if(isEmpty()){
             pFirst = pNew;

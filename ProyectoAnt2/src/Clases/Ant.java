@@ -1,7 +1,7 @@
 
 package Clases;
 
-import EDD.Lista;
+
 import EDD.Vertice;
 
 /**

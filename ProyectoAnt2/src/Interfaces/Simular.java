@@ -15,6 +15,8 @@ public class Simular extends javax.swing.JFrame {
      */
     public Simular() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);    
     }
 
     /**
@@ -31,6 +33,7 @@ public class Simular extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        Volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,10 +58,24 @@ public class Simular extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 260, 110));
 
+        Volver.setBackground(new java.awt.Color(243, 219, 195));
+        Volver.setForeground(new java.awt.Color(0, 0, 0));
+        Volver.setText("Menu");
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        InterfaceFunctions.VolverMenu();
+    }//GEN-LAST:event_VolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,6 +113,7 @@ public class Simular extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
