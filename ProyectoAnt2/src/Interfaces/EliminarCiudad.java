@@ -10,19 +10,14 @@ package Interfaces;
  */
 public class EliminarCiudad extends javax.swing.JFrame {
 
-     public static Menu v4;
-    
-    public EliminarCiudad(Menu v4) {
+    public EliminarCiudad() {
         initComponents();
-        this.v4 = v4;
-        v4.setVisible(false);
+     
         this.setLocationRelativeTo(null);
         this.setResizable(false); 
         
     }
-    public EliminarCiudad() {
-        initComponents();
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,7 +29,7 @@ public class EliminarCiudad extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        Volver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
@@ -47,15 +42,15 @@ public class EliminarCiudad extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(243, 219, 195));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Menu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Volver.setBackground(new java.awt.Color(243, 219, 195));
+        Volver.setForeground(new java.awt.Color(0, 0, 0));
+        Volver.setText("Menu");
+        Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                VolverActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
+        jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(243, 219, 195));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,9 +87,9 @@ public class EliminarCiudad extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        InterfaceFunctions.VolverMenu();
+    }//GEN-LAST:event_VolverActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -136,7 +131,7 @@ public class EliminarCiudad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Volver;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

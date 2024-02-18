@@ -4,22 +4,17 @@
  */
 package Main;
 
-import Interfaces.Bienvenida;
+
+import Interfaces.InterfaceFunctions;
 
 /**
  *
  * @author nicolepinto
+ * @author Camila Garcia
  */
 public class ProyectoAnt {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-
-        Bienvenida ventana = new Bienvenida();
-        ventana.setVisible(true);
-
+        InterfaceFunctions.openBienvenida();
     }
     
 }

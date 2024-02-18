@@ -15,6 +15,9 @@ public class Mostrar extends javax.swing.JFrame {
      */
     public Mostrar() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false); 
+        
     }
 
     /**
@@ -31,6 +34,7 @@ public class Mostrar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        Volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,10 +58,24 @@ public class Mostrar extends javax.swing.JFrame {
         jButton1.setText("Mostrar");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
 
+        Volver.setBackground(new java.awt.Color(243, 219, 195));
+        Volver.setForeground(new java.awt.Color(0, 0, 0));
+        Volver.setText("Menu");
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 310));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        InterfaceFunctions.VolverMenu();
+    }//GEN-LAST:event_VolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,6 +113,7 @@ public class Mostrar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Volver;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
