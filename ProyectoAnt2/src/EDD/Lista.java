@@ -1,6 +1,10 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package EDD;
 
+import EDD.Nodo;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,11 +12,10 @@ import javax.swing.JOptionPane;
  * @author nicolepinto
  */
 public class Lista {
-    
-    private Nodo pFirst; 
+   
+        private Nodo pFirst; 
     private int size; 
     
-    //Constructor
     public Lista() {
         this.pFirst = null;
         this.size = 0; 
@@ -34,19 +37,18 @@ public class Lista {
         this.size = size;
     }
     
-    //Metodo para verificar si mi lista esta vacia
+    
     public boolean isEmpty(){
         return this.pFirst == null;
     }
     
-    //Destructor
+
     public void vaciar(){
         this.pFirst = null;
         this.size = 0;   
     }
 
-    //Metodo para insertar al final de la lista
-    public void InsertarFinal(Object dato){
+    public void insertarFinal(Object dato){
         Nodo pNew = new Nodo(dato);
         if(isEmpty()){
             pFirst = pNew;
@@ -90,50 +92,7 @@ public class Lista {
         }
     }
     
-    //Metodo para agregar al inicio
-    
-    public void agregarInicio(Object elemento){
-        Nodo nodo= new Nodo(elemento);
-        nodo.setDato(elemento);
-        
-        if (isEmpty()){
-            pFirst= nodo;
-        }else{
-            nodo.setPnext(pFirst);
-            pFirst= nodo;
-        }
-        size++;        
-    }
-    
-    
-    
-    //Metodo para agregar en un indice
-    
-    public void agregarIndice (int indice, Object elemento){
-        Nodo nodo = new Nodo();
-        if (isEmpty()){
-            setpFirst(nodo);
-            size++;
-        }else{
-            if (indice>0){
-                Nodo aux= getpFirst();
-                for (int i = 0; i < indice; i++) {
-                    if(aux.getPnext()==null){
-                        break;
-                    }
-                    aux=aux.getPnext();
-                }
-                nodo.setPnext(aux.getPnext());
-                aux.setPnext(nodo);
-                size++;
-            }else{
-                agregarInicio(elemento);
-            }
-        }      
-    }
-        
-    
-    //Metodo para insertar por una referencia de objeto
+
         public void insertarReferencia(Object ref,Object valor){
         
         Nodo nuevo = new Nodo();
@@ -158,18 +117,6 @@ public class Lista {
         }
     }
     
-    //Metodo que retorna el nodo de la ciudad por su indice
-    public Nodo getCiudadNodoporIndice(int indice){
-        Nodo aux= getpFirst();
-        for (int i = 0; i < indice; i++) {
-            aux=aux.getPnext();
-        }
-        return aux;
-    }
-        
-        
-        
-        
         
     public String Transformar(){
         if(!isEmpty()){
@@ -377,3 +324,10 @@ public class Lista {
    
 }
 
+
+    
+    
+    
+    
+    
+    

@@ -5,6 +5,7 @@
 package Interfaces;
 
 import EDD.Grafo;
+import EDD.Nodo;
 
 /**
  *
@@ -28,16 +29,13 @@ public class AgregarCiudad extends javax.swing.JFrame {
     
     public void LlenarCiudadesChooserCombo(Grafo g){
         CiudadesComboBox.removeAllItems();
-        String [] ciudad= g.nombreEnString();
-        for (int i = 0; i < ciudad.length; i++) {
-            CiudadesComboBox.addItem(ciudad[i]);
+        Nodo aux= g.getListaCiudades().getpFirst();
+        while(g.getListaCiudades()!=null) {
+            CiudadesComboBox.addItem((String) aux.getDato());
+            aux=aux.getPnext();
         }
     }
-    
-    public void crearGrafos(Grafo grafo){
-        Grafo g1= grafo;
-        LlenarCiudadesChooserCombo(g1);
-    }
+
         
         
         
@@ -168,7 +166,7 @@ public class AgregarCiudad extends javax.swing.JFrame {
         distancia.setEnabled(true);
         ciudadnueva.setEnabled(false);
         agregarCiudadB.setEnabled(false);
-        LlenarCiudadesChooserCombo(Code.getGrafo());
+        LlenarCiudadesChooserCombo(InterfaceFunctions.getGrafo());
     }//GEN-LAST:event_agregarCiudadBActionPerformed
 
     /**
