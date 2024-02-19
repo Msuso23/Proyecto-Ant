@@ -4,11 +4,18 @@
  */
 package Interfaces;
 
+import EDD.Grafo;
+import Funciones.FuncionesTxt;
+import Funciones.Messages;
+
 /**
  *
  * @author Camila Garcia
  */
 public class CargarTXT extends javax.swing.JFrame {
+    
+    FuncionesTxt fmanager = new FuncionesTxt();
+    Grafo grafo = new Grafo();
 
     public CargarTXT() {
         initComponents();
@@ -62,7 +69,7 @@ public class CargarTXT extends javax.swing.JFrame {
         jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
 
         guardarB.setBackground(new java.awt.Color(0, 0, 0));
-        guardarB.setText("Guardar");
+        guardarB.setText("Cargar");
         guardarB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarBActionPerformed(evt);
@@ -82,7 +89,12 @@ public class CargarTXT extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void guardarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBActionPerformed
-        // TODO add your handling code here:
+       int output = fmanager.loadFile();
+        
+        if (output == 0) {
+            Messages.information("Los datos se han cargado exitosamente!");   
+            grafo.setListaCiudades(fmanager.getVertices()); 
+        }
     }//GEN-LAST:event_guardarBActionPerformed
 
     /**
