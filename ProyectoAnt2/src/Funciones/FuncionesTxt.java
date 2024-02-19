@@ -4,8 +4,11 @@ import EDD.Arista;
 import EDD.Lista;
 import EDD.Nodo;
 import EDD.Vertice;
+import Interfaces.InterfaceFunctions;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,6 +132,72 @@ public class FuncionesTxt {
     }
     
     public void saveFile(){
-        System.out.println("Guardando archivo...");}
-    
+        Lista ciudad = new Lista();
+        ciudad.insertarFinal("ciudad");
+        Lista aristas = new Lista();
+        aristas.insertarFinal("aristas");
+        Lista datos = InterfaceFunctions.getGrafo().getListaCiudades();
+        
+        Nodo aux = datos.getpFirst();
+        while (aux != null){
+            //Agrega el número de ciudad
+            Vertice v = (Vertice) aux.getDato();
+            ciudad.insertarFinal(v.getNumeroCiudad());
+            
+            if (!v.getList_ady().isEmpty()){
+            Nodo pointer = v.getList_ady().getpFirst();
+            while (pointer != null){
+                
+                Arista a = (Arista) pointer.getDato();
+                String chain = a.getCiudadInicio() + "," + a.getCiudadDestino() + "," + a.getDistancia();
+                
+                if (!aristas.buscar(chain)) {
+                    aristas.insertarFinal(chain);                
+                }
+                
+                pointer = pointer.getPnext();
+            }
+            }
+            aux = aux.getPnext();
+        }
+        
+        Lista lines = new Lista();
+        Nodo auxCiudad = ciudad.getpFirst();
+        while(auxCiudad != null){
+            lines.insertarFinal(auxCiudad);
+        }
+        Nodo auxAristas = aristas.getpFirst();
+        while (auxAristas != null){
+            lines.insertarFinal(auxAristas);
+        }
+
+        // Crear un JFileChooser
+    JFileChooser fileChooser = new JFileChooser();
+
+    // Mostrar el cuadro de diálogo para guardar archivo
+    int option = fileChooser.showSaveDialog(null);
+
+    // Verificar si el usuario ha seleccionado una ruta para guardar el archivo
+    if (option == JFileChooser.APPROVE_OPTION) {
+        // Obtener el archivo seleccionado
+        File selectedFile = fileChooser.getSelectedFile();
+        
+        // Obtener el absolutePath del archivo seleccionado
+        String absolutePath = selectedFile.getAbsolutePath();
+
+        // Escribir en el archivo
+        try (FileWriter writer = new FileWriter(absolutePath)) {
+            // Iterar sobre la lista 'lines' y escribir cada línea en el archivo
+            Nodo linesNode = lines.getpFirst();
+            while (linesNode != null) {
+                String line = (String) linesNode.getDato();
+                writer.write(line + "\n");
+                linesNode = linesNode.getPnext();
+            }
+            Messages.information("Se han guardado los cambios!");
+        } catch (IOException e) {
+            Messages.error("ERROR! Ocurrió un error inesperado");
+        }
+    }
+}
 }

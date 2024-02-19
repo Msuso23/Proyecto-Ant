@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import Funciones.Messages;
+
 /**
  *
  * @author Camila Garcia
@@ -34,6 +36,7 @@ public class Guardar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Volver = new javax.swing.JButton();
+        guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,6 +66,14 @@ public class Guardar extends javax.swing.JFrame {
         });
         jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
+        guardar.setText("Guardar");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
@@ -71,6 +82,10 @@ public class Guardar extends javax.swing.JFrame {
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         InterfaceFunctions.VolverMenu();
     }//GEN-LAST:event_VolverActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        InterfaceFunctions.fmanager.saveFile();
+    }//GEN-LAST:event_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,6 +113,7 @@ public class Guardar extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Guardar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -109,6 +125,7 @@ public class Guardar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Volver;
+    private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

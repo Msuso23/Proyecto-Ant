@@ -5,17 +5,15 @@
 package Interfaces;
 
 import EDD.Grafo;
-import Funciones.FuncionesTxt;
+import EDD.Vertice;
 import Funciones.Messages;
+import static Interfaces.InterfaceFunctions.fmanager;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Camila Garcia
- */
+
 public class CargarTXT extends javax.swing.JFrame {
     
-    FuncionesTxt fmanager = new FuncionesTxt();
-    Grafo grafo = new Grafo();
+    
 
     public CargarTXT() {
         initComponents();
@@ -92,8 +90,12 @@ public class CargarTXT extends javax.swing.JFrame {
        int output = fmanager.loadFile();
         
         if (output == 0) {
-            Messages.information("Los datos se han cargado exitosamente!");   
-            grafo.setListaCiudades(fmanager.getVertices()); 
+            Messages.information("Los datos se han cargado exitosamente!");  
+            Grafo grafo = new Grafo();
+            grafo.setListaCiudades(fmanager.getVertices());
+            InterfaceFunctions.setGrafo(grafo); 
+//            Vertice x = (Vertice) InterfaceFunctions.getGrafo().getListaCiudades().getpFirst().getDato();
+//            JOptionPane.showMessageDialog(this, x.getNumeroCiudad());   
         }
     }//GEN-LAST:event_guardarBActionPerformed
 
