@@ -82,7 +82,7 @@ public class FuncionesTxt {
                         //TryCatch para evaluar que las ciudades sean un entero
                         try{
                             int entero = Integer.parseInt(line);                         
-                            Vertice v = new Vertice(entero, new Lista());
+                            Vertice v = new Vertice(entero);
                             vertices.insertarFinal(v);
                         }
                         catch (NumberFormatException ex){
