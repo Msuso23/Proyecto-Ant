@@ -1,24 +1,25 @@
 
 package Clases;
 
+import EDD.Lista;
 import EDD.Vertice;
 
 /**
  *
  * @author Camila Garcia
  */
-public class Ant {
+public class Hormiga {
     private Vertice ciudadActual;
-    private Vertice CiudadesRecorridas;
+    private Lista CiudadesRecorridas;
     private double longitud;
  
 
     //Constructor
 
-    public Ant(Vertice ciudadActual, Vertice CiudadesRecorridas, double longitud) {
-        this.ciudadActual = ciudadActual;
-        this.CiudadesRecorridas = CiudadesRecorridas;
-        this.longitud = longitud;
+    public Hormiga() {
+        this.ciudadActual = null;
+        this.CiudadesRecorridas = new Lista();
+        this.longitud = 0;
     }
 
     public Vertice getCiudadActual() {
@@ -29,11 +30,11 @@ public class Ant {
         this.ciudadActual = ciudadActual;
     }
 
-    public Vertice getCiudadesRecorridas() {
+    public Lista getCiudadesRecorridas() {
         return CiudadesRecorridas;
     }
 
-    public void setCiudadesRecorridas(Vertice CiudadesRecorridas) {
+    public void setCiudadesRecorridas(Lista CiudadesRecorridas) {
         this.CiudadesRecorridas = CiudadesRecorridas;
     }
 

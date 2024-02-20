@@ -15,11 +15,13 @@ public class Arista {
     private Vertice ciudadInicio;
     private Vertice ciudadDestino;
     private double distancia;
+    private double feromonas;
 
     public Arista(Vertice ciudadInicio, Vertice ciudadDestino, double distancia) {
         this.ciudadInicio = ciudadInicio;
         this.ciudadDestino = ciudadDestino;
         this.distancia = distancia;
+        this.feromonas = 0;
     }
 
     public Vertice getCiudadInicio() {
@@ -44,6 +46,14 @@ public class Arista {
 
     public void setDistancia(double distancia) {
         this.distancia = distancia;
+    }
+
+    public double getFeromonas() {
+        return feromonas;
+    }
+
+    public void setFeromonas(double feromonas) {
+        this.feromonas = feromonas;
     }
     
     

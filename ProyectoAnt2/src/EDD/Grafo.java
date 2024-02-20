@@ -16,8 +16,6 @@ public class Grafo {
         this.ListaCiudades = new Lista();
     }
 
-
-   
     public Lista getListaCiudades() {
         return ListaCiudades;
     }
@@ -77,7 +75,7 @@ public class Grafo {
         }
     }
     
-    public boolean buscarArista(Arista arista) {  //Aca falta que cristian haga el metodo de buscar arista para queme salga bine
+    public boolean buscarArista(Arista arista) {  
         for (int i = 0; i < ListaCiudades.getSize(); i++) {
             Vertice vertice = (Vertice) ListaCiudades.getValor(i);
             if (vertice.buscarArista(arista) == 1) {
@@ -138,24 +136,4 @@ public class Grafo {
         return null;
     }
     
-    public String toString() { 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Ciudades:\n");
-        for (int i = 0; i < ListaCiudades.getSize();i++) {
-            Vertice ciudad = (Vertice) ListaCiudades.getValor(i);
-            sb.append(ciudad.getNumeroCiudad()).append("\n");
-        }
-        sb.append("Aristas:\n");
-        for (int i = 0; i < ListaCiudades.getSize();i++) {
-            Vertice ciudad = (Vertice) ListaCiudades.getValor(i);
-            for (int j = 0; j < ciudad.getList_ady().getSize();j++) {
-                Arista arista = (Arista) ciudad.getList_ady().getValor(j);
-                if(arista.getCiudadDestino().getNumeroCiudad() > ciudad.getNumeroCiudad()){
-                    sb.append(arista.getCiudadInicio().getNumeroCiudad()).append(" ,").append(arista.getCiudadDestino().getNumeroCiudad()).append(" ,").append(arista.getDistancia()).append("\n");
-                }
-                
-            }
-        }
-        return sb.toString();
-    }
 }
