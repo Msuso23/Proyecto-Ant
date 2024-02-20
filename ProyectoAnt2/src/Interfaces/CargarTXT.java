@@ -5,6 +5,7 @@
 package Interfaces;
 
 import EDD.Grafo;
+
 import EDD.Lista;
 import EDD.Vertice;
 import Funciones.Messages;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 public class CargarTXT extends javax.swing.JFrame {
     
     
+
 
     public CargarTXT() {
         initComponents();
@@ -107,6 +109,7 @@ public class CargarTXT extends javax.swing.JFrame {
             grafo.setListaCiudades(fmanager.getVertices());
             InterfaceFunctions.setGrafo(grafo); 
   
+
         }
     }//GEN-LAST:event_guardarBActionPerformed
 

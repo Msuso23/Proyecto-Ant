@@ -4,11 +4,13 @@ import EDD.Arista;
 import EDD.Lista;
 import EDD.Nodo;
 import EDD.Vertice;
+
 import Interfaces.InterfaceFunctions;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,9 +22,10 @@ public class FuncionesTxt {
     Lista vertices = new Lista();
     
     public int loadFile(){
+
         
         vertices = new Lista(); //Vaciar en caso de cargar un segundo txt
-        
+
     //0: CÓDIGO EXITOSO
     //1: SALIDA ERRÓNEA
 
@@ -94,6 +97,7 @@ public class FuncionesTxt {
                         if(matcher.matches()){
                             String[] aSplit = line.split(",");
                             Vertice a = new Vertice(Integer.parseInt(aSplit[0]), null);
+
                             Vertice b = new Vertice(Integer.parseInt(aSplit[1]), null);
                             Nodo n1 = vertices.getpFirst();
                             while (n1 != null){
@@ -114,16 +118,19 @@ public class FuncionesTxt {
 
                             Arista ars = new Arista(a,b, Double.parseDouble(aSplit[2]));
                  
+
                             //Coordinar vertices con sus aristas (Lista_ady)
                             for (int i = 0; i < vertices.getSize(); i++) {
                             Vertice aux = (Vertice) vertices.getValor(i);
                          
                             if (aux.getNumeroCiudad() == a.getNumeroCiudad()){
+
                                 a.getList_ady().insertarFinal(ars);
                                 
                                 }
                             else if (aux.getNumeroCiudad() == b.getNumeroCiudad()){
                                 b.getList_ady().insertarFinal(ars);
+
     
                             }  
                             }
@@ -152,6 +159,7 @@ public class FuncionesTxt {
         return vertices;
     }
     
+
     public void saveFile() {
     Lista ciudad = new Lista();
     ciudad.insertarFinal("ciudad");
@@ -234,3 +242,4 @@ public class FuncionesTxt {
     }
 }
 }
+
