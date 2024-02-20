@@ -3,7 +3,7 @@ package EDD;
 
 import EDD.Lista;
 import EDD.Vertice;
-import javax.swing.JOptionPane;
+import Funciones.Messages;
 
 /**
  *
@@ -53,10 +53,12 @@ public class Grafo {
     public void agregarVertice(Vertice ciudades) { 
         if (!isVertex(ciudades)) {
             ListaCiudades.insertarFinal(ciudades);
-            JOptionPane.showMessageDialog(null, "Vertice insertado con exito.");
+            Messages.information("Vertice insertado con exito.");
 
         } else {
-            JOptionPane.showMessageDialog(null, "El vertice ya existe");
+            Messages.information("El vertice ya existe");
+            
+            
         }
     }
     
@@ -65,12 +67,13 @@ public class Grafo {
             
     public void eliminarVertice(Vertice ciudad) {
         if (isEmpty()) {
-            System.out.println("El grafo está vacío. No hay vértices que eliminar.");
+            Messages.error("El grafo está vacío. No hay vértices que eliminar.");
+            
         } else if (isVertex(ciudad)) {
             ListaCiudades.eliminarReferencia(ciudad);
-            JOptionPane.showMessageDialog(null, "Vértice eliminado con éxito.");
+            Messages.information("Vértice eliminado con éxito.");
         } else {
-            JOptionPane.showMessageDialog(null, "El vértice no existe en el grafo.");
+            Messages.error("El vértice no existe en el grafo.");
         }
     }
     
@@ -96,11 +99,12 @@ public class Grafo {
                     ciudades.getList_ady().insertarFinal(arista2);
                 }
             }
+            Messages.information("Arista agregada.");
             
-            JOptionPane.showMessageDialog(null, "Arista agregada.");
             
         } else {
-            JOptionPane.showMessageDialog(null, "La Arista ya existe");
+            Messages.error("La Arista ya existe");
+       
         }
     }
     
@@ -115,10 +119,10 @@ public class Grafo {
                     ciudades.getList_ady().eliminarReferencia(arista2);
                 }
             }
-            JOptionPane.showMessageDialog(null, "Arista eliminada.");
+            Messages.information("Arista eliminada.");
             
         } else {
-            JOptionPane.showMessageDialog(null, "La Arista no existe.");
+           Messages.error("La Arista no existe.");
         }
     }
 

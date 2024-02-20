@@ -2,6 +2,7 @@
 package Interfaces;
 
 import EDD.Grafo;
+import Funciones.FuncionesTxt;
 
 /**
  *
@@ -10,7 +11,7 @@ import EDD.Grafo;
 
 //Esta clase tiene los metodos para abrir las interfaces 
 public class InterfaceFunctions {
-    private static final  Bienvenida paginaprincipal= new Bienvenida(); 
+    private static final Bienvenida paginaprincipal= new Bienvenida(); 
     private static final Menu menu =new Menu();
     private static final CargarTXT cargartxt= new CargarTXT();
     private static final EliminarCiudad eliminarciudad= new EliminarCiudad();
@@ -18,6 +19,7 @@ public class InterfaceFunctions {
     private static final Simular simulacion = new Simular();
     private static final Mostrar mostragrafo = new Mostrar();
     private static final Guardar guardartxt= new Guardar();
+    public static final FuncionesTxt fmanager = new FuncionesTxt();
     private static Grafo grafo= new Grafo();
 
     public static Grafo getGrafo() {

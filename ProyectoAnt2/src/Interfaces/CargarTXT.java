@@ -5,17 +5,19 @@
 package Interfaces;
 
 import EDD.Grafo;
-import Funciones.FuncionesTxt;
-import Funciones.Messages;
 
-/**
- *
- * @author Camila Garcia
- */
+import EDD.Lista;
+import EDD.Vertice;
+import Funciones.Messages;
+import static Interfaces.InterfaceFunctions.fmanager;
+import static Interfaces.InterfaceFunctions.setGrafo;
+import javax.swing.JOptionPane;
+
+
 public class CargarTXT extends javax.swing.JFrame {
     
-    FuncionesTxt fmanager = new FuncionesTxt();
-    Grafo grafo = new Grafo();
+    
+
 
     public CargarTXT() {
         initComponents();
@@ -37,6 +39,8 @@ public class CargarTXT extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Volver = new javax.swing.JButton();
         guardarB = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,7 +79,14 @@ public class CargarTXT extends javax.swing.JFrame {
                 guardarBActionPerformed(evt);
             }
         });
-        jPanel2.add(guardarB, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
+        jPanel2.add(guardarB, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -91,9 +102,14 @@ public class CargarTXT extends javax.swing.JFrame {
     private void guardarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBActionPerformed
        int output = fmanager.loadFile();
         
+        
         if (output == 0) {
-            Messages.information("Los datos se han cargado exitosamente!");   
-            grafo.setListaCiudades(fmanager.getVertices()); 
+            Messages.information("Los datos se han cargado exitosamente!");  
+            Grafo grafo = new Grafo();
+            grafo.setListaCiudades(fmanager.getVertices());
+            InterfaceFunctions.setGrafo(grafo); 
+  
+
         }
     }//GEN-LAST:event_guardarBActionPerformed
 
@@ -141,5 +157,7 @@ public class CargarTXT extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
