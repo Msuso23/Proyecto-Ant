@@ -136,4 +136,24 @@ public class Grafo {
         return null;
     }
     
+    public String toString() { 
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ciudades:\n");
+        for (int i = 0; i < ListaCiudades.getSize();i++) {
+            Vertice ciudad = (Vertice) ListaCiudades.getValor(i);
+            sb.append(ciudad.getNumeroCiudad()).append("\n");
+        }
+        sb.append("Aristas:\n");
+        for (int i = 0; i < ListaCiudades.getSize();i++) {
+            Vertice ciudad = (Vertice) ListaCiudades.getValor(i);
+            for (int j = 0; j < ciudad.getList_ady().getSize();j++) {
+                Arista arista = (Arista) ciudad.getList_ady().getValor(j);
+                if(arista.getCiudadDestino().getNumeroCiudad() > ciudad.getNumeroCiudad()){
+                    sb.append(arista.getCiudadInicio().getNumeroCiudad()).append(" ,").append(arista.getCiudadDestino().getNumeroCiudad()).append(" ,").append(arista.getDistancia()).append("\n");
+                }
+                
+            }
+        }
+        return sb.toString();
+    }
 }
