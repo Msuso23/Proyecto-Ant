@@ -20,6 +20,9 @@ public class FuncionesTxt {
     Lista vertices = new Lista();
     
     public int loadFile(){
+        
+        vertices = new Lista(); //Vaciar en caso de cargar un segundo txt
+        
     //0: CÓDIGO EXITOSO
     //1: SALIDA ERRÓNEA
 
@@ -91,18 +94,36 @@ public class FuncionesTxt {
                         if(matcher.matches()){
                             String[] aSplit = line.split(",");
                             Vertice a = new Vertice(Integer.parseInt(aSplit[0]), null);
-                            Vertice b = new Vertice(Integer.parseInt(aSplit[0]), null);
+                            Vertice b = new Vertice(Integer.parseInt(aSplit[1]), null);
+                            Nodo n1 = vertices.getpFirst();
+                            while (n1 != null){
+                                Vertice v1 = (Vertice) n1.getDato();
+                                if(a.getNumeroCiudad() == v1.getNumeroCiudad()){
+                                    a = v1;
+                                }         
+                                n1 = n1.getPnext();            
+                            }
+                            Nodo n2 = vertices.getpFirst();
+                            while (n2 != null){
+                                Vertice v2 = (Vertice) n2.getDato();
+                                if(b.getNumeroCiudad() == v2.getNumeroCiudad()){
+                                    b = v2;
+                                }         
+                                n2 = n2.getPnext();            
+                            }
+
                             Arista ars = new Arista(a,b, Double.parseDouble(aSplit[2]));
+                 
                             //Coordinar vertices con sus aristas (Lista_ady)
                             for (int i = 0; i < vertices.getSize(); i++) {
                             Vertice aux = (Vertice) vertices.getValor(i);
                          
                             if (aux.getNumeroCiudad() == a.getNumeroCiudad()){
-                                aux.getList_ady().insertarFinal(ars);
+                                a.getList_ady().insertarFinal(ars);
                                 
                                 }
                             else if (aux.getNumeroCiudad() == b.getNumeroCiudad()){
-                                aux.getList_ady().insertarFinal(ars);
+                                b.getList_ady().insertarFinal(ars);
     
                             }  
                             }
@@ -131,47 +152,59 @@ public class FuncionesTxt {
         return vertices;
     }
     
-    public void saveFile(){
-        Lista ciudad = new Lista();
-        ciudad.insertarFinal("ciudad");
-        Lista aristas = new Lista();
-        aristas.insertarFinal("aristas");
-        Lista datos = InterfaceFunctions.getGrafo().getListaCiudades();
+    public void saveFile() {
+    Lista ciudad = new Lista();
+    ciudad.insertarFinal("ciudad");
+
+    Lista aristas = new Lista();
+    aristas.insertarFinal("aristas");
+
+    Lista datos = InterfaceFunctions.getGrafo().getListaCiudades();
+    Nodo aux = datos.getpFirst();
+
+    // Recorrer los datos y agregarlos a las listas
+    while (aux != null) {
+        Vertice v = (Vertice) aux.getDato();
+        ciudad.insertarFinal(String.valueOf(v.getNumeroCiudad()));
         
-        Nodo aux = datos.getpFirst();
-        while (aux != null){
-            //Agrega el número de ciudad
-            Vertice v = (Vertice) aux.getDato();
-            ciudad.insertarFinal(v.getNumeroCiudad());
-            
-            if (!v.getList_ady().isEmpty()){
+        if (!v.getList_ady().isEmpty()){
             Nodo pointer = v.getList_ady().getpFirst();
-            while (pointer != null){
+            while (pointer != null) {
                 
                 Arista a = (Arista) pointer.getDato();
-                String chain = a.getCiudadInicio() + "," + a.getCiudadDestino() + "," + a.getDistancia();
-                
-                if (!aristas.buscar(chain)) {
-                    aristas.insertarFinal(chain);                
+                if (v.getNumeroCiudad() == a.getCiudadInicio().getNumeroCiudad()){
+                String chain = a.getCiudadInicio().getNumeroCiudad() + "," + a.getCiudadDestino().getNumeroCiudad() + "," + a.getDistancia();
+                aristas.insertarFinal(chain);
                 }
-                
                 pointer = pointer.getPnext();
             }
-            }
-            aux = aux.getPnext();
         }
+        aux = aux.getPnext();
+            
         
-        Lista lines = new Lista();
-        Nodo auxCiudad = ciudad.getpFirst();
-        while(auxCiudad != null){
-            lines.insertarFinal(auxCiudad);
-        }
-        Nodo auxAristas = aristas.getpFirst();
-        while (auxAristas != null){
-            lines.insertarFinal(auxAristas);
+        
         }
 
-        // Crear un JFileChooser
+
+    // Crear la lista que contendrá las líneas a escribir en el archivo
+    Lista lines = new Lista();
+
+    // Agregar los nodos de ciudad a la lista 'lines'
+    Nodo auxCiudad = ciudad.getpFirst();
+    while (auxCiudad != null) {
+        lines.insertarFinal(auxCiudad.getDato());
+        auxCiudad = auxCiudad.getPnext();
+    }
+
+    // Agregar los nodos de aristas a la lista 'lines'
+    Nodo auxAristas = aristas.getpFirst();
+    while (auxAristas != null) {
+        lines.insertarFinal(auxAristas.getDato());
+        auxAristas = auxAristas.getPnext();
+    }
+    
+
+    // Crear un JFileChooser
     JFileChooser fileChooser = new JFileChooser();
 
     // Mostrar el cuadro de diálogo para guardar archivo
@@ -181,7 +214,7 @@ public class FuncionesTxt {
     if (option == JFileChooser.APPROVE_OPTION) {
         // Obtener el archivo seleccionado
         File selectedFile = fileChooser.getSelectedFile();
-        
+
         // Obtener el absolutePath del archivo seleccionado
         String absolutePath = selectedFile.getAbsolutePath();
 

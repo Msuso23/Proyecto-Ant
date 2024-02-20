@@ -16,13 +16,13 @@ public class SistemaHormiga {
     
     
     
-    public double inicializarFeromonas(Grafo grafo) {
-        // Inicializar la variable feromonas
-        setFeromonas(0.0);
-        int numCiudades = grafo.getVertices();
-        double feromonas = 1 / numCiudades; // Calcular la cantidad inicial de feromonas
-        return feromonas;
-    }
+//    public double inicializarFeromonas(Grafo grafo) {
+//        // Inicializar la variable feromonas
+//        setFeromonas(0.0);
+//        int numCiudades = grafo.getVertices();
+//        double feromonas = 1 / numCiudades; // Calcular la cantidad inicial de feromonas
+//        return feromonas;
+//    }
     
     
     
