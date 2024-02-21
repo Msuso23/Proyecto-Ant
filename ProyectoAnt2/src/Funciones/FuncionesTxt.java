@@ -82,7 +82,7 @@ public class FuncionesTxt {
                         //TryCatch para evaluar que las ciudades sean un entero
                         try{
                             int entero = Integer.parseInt(line);                         
-                            Vertice v = new Vertice(entero,new Lista());
+                            Vertice v = new Vertice(entero);
                             vertices.insertarFinal(v);
                         }
                         catch (NumberFormatException ex){
@@ -96,9 +96,9 @@ public class FuncionesTxt {
                         Matcher matcher = pattern.matcher(line);
                         if(matcher.matches()){
                             String[] aSplit = line.split(",");
-                            Vertice a = new Vertice(Integer.parseInt(aSplit[0]), null);
+                            Vertice a = new Vertice(Integer.parseInt(aSplit[0]));
 
-                            Vertice b = new Vertice(Integer.parseInt(aSplit[1]), null);
+                            Vertice b = new Vertice(Integer.parseInt(aSplit[1]));
                             Nodo n1 = vertices.getpFirst();
                             while (n1 != null){
                                 Vertice v1 = (Vertice) n1.getDato();
