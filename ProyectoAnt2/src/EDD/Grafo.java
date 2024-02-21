@@ -16,8 +16,6 @@ public class Grafo {
         this.ListaCiudades = new Lista();
     }
 
-
-   
     public Lista getListaCiudades() {
         return ListaCiudades;
     }
@@ -77,7 +75,7 @@ public class Grafo {
         }
     }
     
-    public boolean buscarArista(Arista arista) {  //Aca falta que cristian haga el metodo de buscar arista para queme salga bine
+    public boolean buscarArista(Arista arista) {  
         for (int i = 0; i < ListaCiudades.getSize(); i++) {
             Vertice vertice = (Vertice) ListaCiudades.getValor(i);
             if (vertice.buscarArista(arista) == 1) {
