@@ -55,22 +55,24 @@ public class CargarTXT extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("ISOCPEUR", 1, 24)); // NOI18N
         jLabel1.setText("Cargar txt");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carga-de-archivos (1).png"))); // NOI18N
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 90));
-
-        Volver.setBackground(new java.awt.Color(243, 219, 195));
-        Volver.setForeground(new java.awt.Color(0, 0, 0));
-        Volver.setText("Menu");
+        Volver.setBackground(new java.awt.Color(0, 0, 0));
+        Volver.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        Volver.setForeground(new java.awt.Color(255, 51, 0));
+        Volver.setText("<Menu");
+        Volver.setBorder(null);
         Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VolverActionPerformed(evt);
             }
         });
-        jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
+        jPanel4.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 90));
 
         guardarB.setBackground(new java.awt.Color(0, 0, 0));
         guardarB.setText("Cargar");
@@ -79,14 +81,16 @@ public class CargarTXT extends javax.swing.JFrame {
                 guardarBActionPerformed(evt);
             }
         });
-        jPanel2.add(guardarB, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
+        jPanel2.add(guardarB, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
 
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 

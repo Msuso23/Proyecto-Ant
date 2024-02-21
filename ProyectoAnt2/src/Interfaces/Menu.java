@@ -119,14 +119,16 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.add(AgregarCiudadB, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 150, -1));
 
         jButton7.setBackground(new java.awt.Color(243, 219, 195));
-        jButton7.setForeground(new java.awt.Color(0, 0, 0));
-        jButton7.setText("Salir");
+        jButton7.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 51, 51));
+        jButton7.setText("<Salir");
+        jButton7.setBorder(null);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, -1, -1));
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

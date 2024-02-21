@@ -1,20 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Interfaces;
 
 import EDD.Grafo;
 import EDD.Nodo;
-
+import EDD.Vertice;
+import Funciones.Messages;
+import EDD.Arista;
 /**
  *
  * @author Camila Garcia
  */
 public class AgregarCiudad extends javax.swing.JFrame {
-    
     String ciudadagregar="";
     String ciudadconectar="";
+    double distanciaentreciudades=0;
 
     
     public AgregarCiudad() {
@@ -35,12 +34,6 @@ public class AgregarCiudad extends javax.swing.JFrame {
             aux=aux.getPnext();
         }
     }
-
-        
-        
-        
-    
-
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -134,9 +127,19 @@ public class AgregarCiudad extends javax.swing.JFrame {
 
         ciudadconecta.setBackground(new java.awt.Color(0, 0, 0));
         ciudadconecta.setText("OK");
+        ciudadconecta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ciudadconectaActionPerformed(evt);
+            }
+        });
         jPanel3.add(ciudadconecta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 120, -1));
 
         distancia.setBackground(new java.awt.Color(0, 0, 0));
+        distancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                distanciaActionPerformed(evt);
+            }
+        });
         jPanel3.add(distancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -156,7 +159,7 @@ public class AgregarCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void CiudadesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CiudadesComboBoxActionPerformed
-        ciudadconectar=CiudadesComboBox.getSelectedItem().toString();
+        ciudadconectar=CiudadesComboBox.getSelectedItem().toString(); 
     }//GEN-LAST:event_CiudadesComboBoxActionPerformed
 
     private void agregarCiudadBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCiudadBActionPerformed
@@ -168,6 +171,27 @@ public class AgregarCiudad extends javax.swing.JFrame {
         agregarCiudadB.setEnabled(false);
         LlenarCiudadesChooserCombo(InterfaceFunctions.getGrafo());
     }//GEN-LAST:event_agregarCiudadBActionPerformed
+
+    private void distanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distanciaActionPerformed
+       distanciaentreciudades= Double.parseDouble(distancia.getText());
+    }//GEN-LAST:event_distanciaActionPerformed
+
+    private void ciudadconectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadconectaActionPerformed
+        int cc=Integer.parseInt(ciudadconectar);
+        int ca=Integer.parseInt(ciudadagregar);
+        Vertice ciudadagregarv= new Vertice(ca);
+        Vertice ciudadconectarv=new Vertice(cc);
+        Grafo g=InterfaceFunctions.getGrafo();
+        Arista nuevocamino= new Arista(ciudadagregarv,ciudadconectarv,distanciaentreciudades);
+        if(g.isVertex(ciudadagregarv)==false){
+            g.agregarVertice(ciudadagregarv);
+            g.agregarArista(nuevocamino);
+            Messages.information("La ciudad fue agregada con exito");
+        }else{
+            Messages.error("La ciudad a agregar ya existe");
+        }
+            
+    }//GEN-LAST:event_ciudadconectaActionPerformed
 
     /**
      * @param args the command line arguments

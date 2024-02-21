@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package EDD;
 
 import Funciones.Messages;
@@ -13,11 +10,11 @@ import Funciones.Messages;
 public class Vertice {
     
     private int NumeroCiudad;
-    public Lista list_ady;
+    private Lista list_ady;
 
-    public Vertice(int NumeroCiudad, Lista list_ady) {
+    public Vertice(int NumeroCiudad) {
         this.NumeroCiudad = NumeroCiudad;
-        this.list_ady = list_ady;
+        this.list_ady = new Lista();
     }
 
     public int getNumeroCiudad() {
@@ -53,11 +50,11 @@ public class Vertice {
     
     }
     
-    public Arista buscarArista2(int ciudad){
+    public Arista buscarArista2(int NumeroCiudad){
         Nodo aux = list_ady.getpFirst();
         while (aux != null){
             Arista pointer = (Arista) aux.getDato();
-            if (pointer.getCiudadDestino().getNumeroCiudad() == ciudad){
+            if (pointer.getCiudadDestino().getNumeroCiudad() == NumeroCiudad){
                 return pointer;
             }
             aux = aux.getPnext();    
