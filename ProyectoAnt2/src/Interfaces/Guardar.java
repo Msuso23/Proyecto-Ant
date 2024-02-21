@@ -49,32 +49,35 @@ public class Guardar extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("ISOCPEUR", 1, 24)); // NOI18N
         jLabel1.setText("Guardar");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 90, 20));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 90, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/disco-flexible (3).png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 70, 80));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 70, 80));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 80));
-
-        Volver.setBackground(new java.awt.Color(243, 219, 195));
-        Volver.setForeground(new java.awt.Color(0, 0, 0));
-        Volver.setText("Menu");
+        Volver.setBackground(new java.awt.Color(0, 0, 0));
+        Volver.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        Volver.setForeground(new java.awt.Color(255, 51, 51));
+        Volver.setText("<Menu");
+        Volver.setBorder(null);
         Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VolverActionPerformed(evt);
             }
         });
-        jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
+        jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 80));
+
+        guardar.setBackground(new java.awt.Color(0, 0, 0));
         guardar.setText("Guardar");
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 170, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 180));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

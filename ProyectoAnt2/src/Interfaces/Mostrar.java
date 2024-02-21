@@ -33,8 +33,8 @@ public class Mostrar extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         Volver = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -47,26 +47,28 @@ public class Mostrar extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("ISOCPEUR", 1, 24)); // NOI18N
         jLabel1.setText("Mostrar");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 110, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 110, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/teoria-de-grafos (1).png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+
+        Volver.setBackground(new java.awt.Color(0, 0, 0));
+        Volver.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        Volver.setForeground(new java.awt.Color(255, 51, 51));
+        Volver.setText("<Menu");
+        Volver.setBorder(null);
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 90));
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Mostrar");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
-
-        Volver.setBackground(new java.awt.Color(243, 219, 195));
-        Volver.setForeground(new java.awt.Color(0, 0, 0));
-        Volver.setText("Menu");
-        Volver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 310));
 
