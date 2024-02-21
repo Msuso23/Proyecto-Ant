@@ -10,7 +10,7 @@ import Funciones.Messages;
 public class Vertice {
     
     private int NumeroCiudad;
-    public Lista list_ady;
+    private Lista list_ady;
 
     public Vertice(int NumeroCiudad) {
         this.NumeroCiudad = NumeroCiudad;

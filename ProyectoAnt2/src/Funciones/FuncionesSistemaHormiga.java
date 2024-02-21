@@ -16,6 +16,7 @@ import EDD.Vertice;
  */
 public class FuncionesSistemaHormiga {
     
+    
     public Lista inicializarHormigas(int numeroHormigas, Vertice ciudadInicio){
         Lista hormigas = new Lista();
         for (int i = 0; i < numeroHormigas; i++) {
@@ -25,6 +26,8 @@ public class FuncionesSistemaHormiga {
         }
         return hormigas;
     }
+    
+   
     
     public void inicializarFeromonas(Grafo grafo){
     

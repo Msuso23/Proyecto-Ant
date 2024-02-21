@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Lista {
    
-        private Nodo pFirst; 
+    private Nodo pFirst; 
     private int size; 
     
     public Lista() {

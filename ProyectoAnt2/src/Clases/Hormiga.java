@@ -25,6 +25,7 @@ public class Hormiga {
     }
 
     //Getters y Setters
+    
     public Vertice getCiudadActual() {
         return ciudadActual;
     }
@@ -57,6 +58,7 @@ public class Hormiga {
             Arista arista = ciudadActual.buscarArista2(NumeroCiudad);
             this.setCiudadActual(arista.getCiudadDestino());
             longitud += arista.getDistancia();
+            CiudadesRecorridas.insertarFinal(NumeroCiudad);
             JOptionPane.showMessageDialog(null, "Listo");
         }else{
             JOptionPane.showMessageDialog(null, "Ya visitaste esta ciudad.");
