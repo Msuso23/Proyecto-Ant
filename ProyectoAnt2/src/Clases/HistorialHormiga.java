@@ -4,10 +4,41 @@
  */
 package Clases;
 
-/**
- *
- * @author maribelnunez
- */
 public class HistorialHormiga {
+    private int numHormiga;
+    private String caminoRecorrido;
+    private String longitudRecorrido;
+
+    public HistorialHormiga(int numHormiga, String caminoRecorrido, String longitudRecorrido) {
+        this.numHormiga = numHormiga;
+        this.caminoRecorrido = caminoRecorrido;
+        this.longitudRecorrido = longitudRecorrido;
+    }
+
+    public int getNumHormiga() {
+        return numHormiga;
+    }
+
+    public void setNumHormiga(int numHormiga) {
+        this.numHormiga = numHormiga;
+    }
+
+    public String getCaminoRecorrido() {
+        return caminoRecorrido;
+    }
+
+    public void setCaminoRecorrido(String caminoRecorrido) {
+        this.caminoRecorrido = caminoRecorrido;
+    }
+
+    public String getLongitudRecorrido() {
+        return longitudRecorrido;
+    }
+
+    public void setLongitudRecorrido(String longitudRecorrido) {
+        this.longitudRecorrido = longitudRecorrido;
+    }
+    
     
 }
+

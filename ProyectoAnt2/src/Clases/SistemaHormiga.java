@@ -172,7 +172,14 @@ public class SistemaHormiga {
         
     }
 
-    
+    public String toStringHistorial(){
+        String historialCompleto = "";
+        for (int i = 0; i <this.historial.getSize(); i++) {
+            Historial historial = (Historial) this.historial.getValor(i);
+            historialCompleto += historial.toString() + ("\n");
+        }
+        return historialCompleto;
+    }
         
         
     
