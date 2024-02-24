@@ -254,6 +254,7 @@ public class SistemaHormiga {
         }
     }
     
+    //Funcion que realiza un incremento de feromonas en los caminos que son recorridos por una hormiga
     public void incrementoFeromonas(Hormiga hormiga){
         double contribucion = q/hormiga.getLongitud();
         for (int i = 0; i < hormiga.getCiudadesRecorridas().getSize()-1; i++) {
