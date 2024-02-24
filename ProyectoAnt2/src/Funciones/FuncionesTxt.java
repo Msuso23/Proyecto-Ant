@@ -189,11 +189,7 @@ public class FuncionesTxt {
             }
         }
         aux = aux.getPnext();
-            
-        
-        
-        }
-
+    }
 
     // Crear la lista que contendrá las líneas a escribir en el archivo
     Lista lines = new Lista();
@@ -226,6 +222,11 @@ public class FuncionesTxt {
 
         // Obtener el absolutePath del archivo seleccionado
         String absolutePath = selectedFile.getAbsolutePath();
+        
+        // Agregar la extensión .txt si no está presente
+        if (!absolutePath.toLowerCase().endsWith(".txt")) {
+            absolutePath += ".txt";
+        }
 
         // Escribir en el archivo
         try (FileWriter writer = new FileWriter(absolutePath)) {
@@ -242,5 +243,8 @@ public class FuncionesTxt {
         }
     }
 }
+    
+    public void hola(){}
+
 }
 
