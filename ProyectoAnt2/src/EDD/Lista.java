@@ -132,7 +132,20 @@ public class Lista {
         }
         return "Lista vacia";
     }
-    
+    public String transformarCiudad(){
+        if (!isEmpty()){
+            
+            Nodo aux = pFirst;
+            String expresion = "";
+            
+            for (int i = 0; i < size; i++) {
+            expresion += aux.getDato().toString() + ",";
+            aux = aux.getPnext();
+            }
+            return expresion;           
+        }
+        return "Lista Vacia";
+    }
 
     public boolean eliminarInicio(){
         if(!isEmpty()){
@@ -175,6 +188,8 @@ public class Lista {
             size--;
         }
     }
+    
+    
     
     public void eliminarPosicion(int posicion){
 

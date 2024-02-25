@@ -148,11 +148,99 @@ public class SistemaHormiga {
     public void setHistorialTemporal(Lista historialTemporal) {
         this.historialTemporal = historialTemporal;
     }
+
+    public void simulacion() {
+        for (int i = 0; i < this.ciclos; i++) {
+            for (int j = 0; j < hormigas.getSize(); j++) {
+                Hormiga hormigaActual = (Hormiga) hormigas.getValor(j);
+                this.recorridoCompleto(hormigaActual);  
+            }
+            this.evaporacionFeromonas();
+            this.reiniciarHormigas();
+        }
+    }
     
+    public void reiniciarHormigas(){
+        for (int i = 0; i < hormigas.getSize(); i++) {
+            Hormiga hormiga = (Hormiga) hormigas.getValor(i);
+            hormiga.setCiudadActual(ciudadInicial);
+            hormiga.getCiudadesRecorridas().vaciar();
+            hormiga.setLongitud(0);
+            hormigas.editarPosicion(i, hormiga);
+        }
+    }
+
+    public void recorridoCompleto(Hormiga hormiga) {
+        for (int i = 0; i < grafo.getListaCiudades().getSize(); i++) {
+            if(hormiga.getCiudadActual().getNumeroCiudad() != ciudadFinal.getNumeroCiudad()){
+                Lista ciudadesCandidatas = ciudadesCandidatas(hormiga);
+                if(ciudadesCandidatas.getSize() != 0){
+                    Lista probabilidades = probabilidades(ciudadesCandidatas);
+                    Vertice ciudadProxima = decidirCiudadProxima(ciudadesCandidatas, probabilidades);
+                    Arista arista = hormiga.getCiudadActual().buscarArista2(ciudadProxima.getNumeroCiudad());
+                    hormiga.visitarCiudad(ciudadProxima.getNumeroCiudad(), arista.getDistancia());
+                    this.incrementoFeromonas(hormiga);
+                }
+                break;
+            }
+            break;
+        }
+
+    }
+
+    public Lista ciudadesCandidatas(Hormiga hormiga) {
+        Vertice ciudadActual = hormiga.getCiudadActual();
+        Lista ciudadesCandidatas = new Lista();
+        
+        for (int i = 0; i < ciudadActual.getList_ady().getSize(); i++) {
+            Arista aristaActual = (Arista) ciudadActual.getList_ady().getValor(i);
+            if(!hormiga.visitado(aristaActual.getCiudadDestino().getNumeroCiudad())){
+                ciudadesCandidatas.insertarFinal(aristaActual);
+            }
+        }
+        
+        return ciudadesCandidatas;
+    }
+
+    public Lista probabilidades(Lista ciudadesCandidatas) {
+        double sumaProbabilidades = 0;
+        Lista probabilidades = new Lista();
+        
+        for (int i = 0; i < ciudadesCandidatas.getSize(); i++) {
+            Arista aristaActual = (Arista) ciudadesCandidatas.getValor(i);
+            double t = Math.pow(aristaActual.getFeromonas(), this.a);
+            double n = Math.pow(this.q/aristaActual.getDistancia(), this.b);
+            double probabilidad = t * n;
+            sumaProbabilidades += probabilidad;
+            probabilidades.insertarFinal(probabilidad);
+        }
+        
+        for (int i = 0; i < probabilidades.getSize(); i++) {
+            double probActual = (double) probabilidades.getValor(i) / sumaProbabilidades;
+            probabilidades.editarReferencia(probabilidades.getValor(i), probActual);
+        }
+        
+        return probabilidades;
+    }
     
-    
-    
-    
+    public Vertice decidirCiudadProxima(Lista ciudadesCandidatas, Lista probabilidades){
+        int posicion = -1;
+        double mayorPorbabilidad = 0;
+        
+        for (int i = 0; i < probabilidades.getSize(); i++) {
+            double probActual = (double) probabilidades.getValor(i);
+            if(probActual > mayorPorbabilidad){
+                mayorPorbabilidad = probActual;
+                posicion = i;         
+            }
+        }
+        
+        Arista aristaFinal = (Arista) ciudadesCandidatas.getValor(posicion);
+        
+        return aristaFinal.getCiudadDestino();
+    }
+
+  
     
     
     public void evaporacionFeromonas(){
@@ -166,13 +254,31 @@ public class SistemaHormiga {
         }
     }
     
+    //Funcion que realiza un incremento de feromonas en los caminos que son recorridos por una hormiga
     public void incrementoFeromonas(Hormiga hormiga){
+        double contribucion = q/hormiga.getLongitud();
+        for (int i = 0; i < hormiga.getCiudadesRecorridas().getSize()-1; i++) {
+            Vertice ciudadActual= (Vertice) hormiga.getCiudadesRecorridas().getValor(i);
+            Vertice ciudadSiguiente = (Vertice) hormiga.getCiudadesRecorridas().getValor(i+1);
+            
+            int aux=ciudadActual.buscarArista2(ciudadSiguiente.getNumeroCiudad()).getCiudadDestino().getNumeroCiudad();
+            
+            double feromonasTotales = contribucion + aux;
+            ciudadActual.buscarArista2(ciudadSiguiente.getNumeroCiudad()).setFeromonas(feromonasTotales);
+        }
         
         
         
     }
 
-    
+    public String toStringHistorial(){
+        String historialCompleto = "";
+        for (int i = 0; i <this.historial.getSize(); i++) {
+            Historial historial = (Historial) this.historial.getValor(i);
+            historialCompleto += historial.toString() + ("\n");
+        }
+        return historialCompleto;
+    }
         
         
     
