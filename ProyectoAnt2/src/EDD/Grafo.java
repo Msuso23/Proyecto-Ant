@@ -31,20 +31,18 @@ public class Grafo {
     
     // Se utiliza para verificar si un vértice con un número de ciudad específico existe en el grafo.
     public boolean isVertex(Vertice ciudades) {
-        if (isEmpty()) {
-            return false;
-        } else {
-            int numVert = ciudades.getNumeroCiudad();
+        
+            int numeroVertice = ciudades.getNumeroCiudad();
 
             for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
                 Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
-                if (vertex.getNumeroCiudad() == numVert) {
+                if (vertex.getNumeroCiudad() == numeroVertice) {
                     return true;
                 }
             }
             return false;
         }
-    }
+    
     
     //Agregar ciudad al grafo
 
