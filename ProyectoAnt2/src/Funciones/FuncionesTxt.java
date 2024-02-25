@@ -26,8 +26,9 @@ public class FuncionesTxt {
         
         vertices = new Lista(); //Vaciar en caso de cargar un segundo txt
 
-    //0: CÓDIGO EXITOSO
-    //1: SALIDA ERRÓNEA
+        //0: CÓDIGO EXITOSO
+        //1: SALIDA ERRÓNEA
+        //1. Cargar JFileChooser
 
         //1. Cargar JFileChooser
         JFileChooser fc = new JFileChooser();
@@ -162,6 +163,8 @@ public class FuncionesTxt {
     
 
     public void saveFile() {
+    Boolean exitoso = false;    
+        
     Lista ciudad = new Lista();
     ciudad.insertarFinal("ciudad");
 
@@ -189,11 +192,7 @@ public class FuncionesTxt {
             }
         }
         aux = aux.getPnext();
-            
-        
-        
-        }
-
+    }
 
     // Crear la lista que contendrá las líneas a escribir en el archivo
     Lista lines = new Lista();
@@ -226,6 +225,11 @@ public class FuncionesTxt {
 
         // Obtener el absolutePath del archivo seleccionado
         String absolutePath = selectedFile.getAbsolutePath();
+        
+        // Agregar la extensión .txt si no está presente
+        if (!absolutePath.toLowerCase().endsWith(".txt")) {
+            absolutePath += ".txt";
+        }
 
         // Escribir en el archivo
         try (FileWriter writer = new FileWriter(absolutePath)) {
@@ -237,10 +241,21 @@ public class FuncionesTxt {
                 linesNode = linesNode.getPnext();
             }
             Messages.information("Se han guardado los cambios!");
+            exitoso = true;
+         
         } catch (IOException e) {
-            Messages.error("ERROR! Ocurrió un error inesperado");
+            Messages.error("ERROR! Ocurrió un error inesperado.");
+      
         }
     }
+    if (!exitoso){
+    Messages.error("No se ha guardado ningún archivo.");
+    }
+    
+    
 }
+    
+
+
 }
 

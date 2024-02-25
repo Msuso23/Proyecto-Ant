@@ -191,8 +191,6 @@ public class SistemaHormiga {
                     Vertice ciudadProxima = decidirCiudadProxima(ciudadesCandidatas, probabilidades);
                     Arista arista = hormiga.getCiudadActual().buscarArista2(ciudadProxima.getNumeroCiudad());
                     hormiga.visitarCiudad(ciudadProxima.getNumeroCiudad(), arista.getDistancia());
-                }else{
-                    break;
                 }
             }else{
                 break;
@@ -270,9 +268,6 @@ public class SistemaHormiga {
     }
 
   
-    public void incrementoFeromonas(){
-    
-    }
     
         
     //Actualiza las feromonas de los caminos entre ciudades luego de que las hormigas hacen su recorrido
@@ -287,7 +282,18 @@ public class SistemaHormiga {
         }
     }
     
+    //Funcion que realiza un incremento de feromonas en los caminos que son recorridos por una hormiga
     public void incrementoFeromonas(Hormiga hormiga){
+        double contribucion = q/hormiga.getLongitud();
+        for (int i = 0; i < hormiga.getCiudadesRecorridas().getSize()-1; i++) {
+            Vertice ciudadActual= (Vertice) hormiga.getCiudadesRecorridas().getValor(i);
+            Vertice ciudadSiguiente = (Vertice) hormiga.getCiudadesRecorridas().getValor(i+1);
+            
+            int aux=ciudadActual.buscarArista2(ciudadSiguiente.getNumeroCiudad()).getCiudadDestino().getNumeroCiudad();
+            
+            double feromonasTotales = contribucion + aux;
+            ciudadActual.buscarArista2(ciudadSiguiente.getNumeroCiudad()).setFeromonas(feromonasTotales);
+        }
         
         
         

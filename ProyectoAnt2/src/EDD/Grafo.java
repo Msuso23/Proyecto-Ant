@@ -31,20 +31,18 @@ public class Grafo {
     
     // Se utiliza para verificar si un vértice con un número de ciudad específico existe en el grafo.
     public boolean isVertex(Vertice ciudades) {
-        if (isEmpty()) {
-            return false;
-        } else {
-            int numVert = ciudades.getNumeroCiudad();
+        
+            int numeroVertice = ciudades.getNumeroCiudad();
 
             for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
                 Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
-                if (vertex.getNumeroCiudad() == numVert) {
+                if (vertex.getNumeroCiudad() == numeroVertice) {
                     return true;
                 }
             }
             return false;
         }
-    }
+    
     
     //Agregar ciudad al grafo
 
@@ -135,6 +133,27 @@ public class Grafo {
         }
         return null;
     }
+    
+    //Eliminar ciudad de la lista de Ciudades
+    public void EliminarCiudad(Object ciudad){
+        Nodo aux= ListaCiudades.getpFirst();
+        while(aux.getPnext()!=null){
+            if(aux.getDato()==ciudad){
+                break;
+            }
+            aux=aux.getPnext();
+        }
+        if(aux.getPnext().getPnext()!=null){
+            Nodo aux3= aux.getPnext();
+            Nodo aux2= aux3.getPnext();
+            aux.setPnext(aux2);
+            aux3.setPnext(null);
+        }else{
+            aux.setPnext(null);
+        }
+        
+    }
+    
     
     public String toString() { 
         StringBuilder sb = new StringBuilder();

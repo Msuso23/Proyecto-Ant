@@ -13,18 +13,14 @@ import static Interfaces.InterfaceFunctions.fmanager;
 import static Interfaces.InterfaceFunctions.setGrafo;
 import javax.swing.JOptionPane;
 
-
 public class CargarTXT extends javax.swing.JFrame {
-    
-    
-
 
     public CargarTXT() {
         initComponents();
-       
+
         this.setLocationRelativeTo(null);
-        this.setResizable(false); 
-        
+        this.setResizable(false);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -40,7 +36,7 @@ public class CargarTXT extends javax.swing.JFrame {
         Volver = new javax.swing.JButton();
         guardarB = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        report = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,16 +77,18 @@ public class CargarTXT extends javax.swing.JFrame {
                 guardarBActionPerformed(evt);
             }
         });
-        jPanel2.add(guardarB, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+        jPanel2.add(guardarB, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, -1, -1));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        report.setEditable(false);
+        report.setBackground(new java.awt.Color(0, 0, 0));
+        report.setColumns(20);
+        report.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        report.setForeground(new java.awt.Color(255, 255, 255));
+        report.setRows(5);
+        report.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(report);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 300, 130));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -104,16 +102,14 @@ public class CargarTXT extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void guardarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBActionPerformed
-       int output = fmanager.loadFile();
-        
-        
+        int output = fmanager.loadFile();
+
         if (output == 0) {
-            Messages.information("Los datos se han cargado exitosamente!");  
+            Messages.information("Los datos se han cargado exitosamente!");
             Grafo grafo = new Grafo();
             grafo.setListaCiudades(fmanager.getVertices());
-            InterfaceFunctions.setGrafo(grafo); 
-  
-
+            report.setText(grafo.toString());
+            InterfaceFunctions.setGrafo(grafo);
         }
     }//GEN-LAST:event_guardarBActionPerformed
 
@@ -143,6 +139,7 @@ public class CargarTXT extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CargarTXT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -162,6 +159,6 @@ public class CargarTXT extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea report;
     // End of variables declaration//GEN-END:variables
 }

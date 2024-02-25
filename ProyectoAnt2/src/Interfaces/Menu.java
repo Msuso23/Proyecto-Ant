@@ -185,6 +185,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void EliminarCiudadBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCiudadBActionPerformed
        InterfaceFunctions.openEliminarCiudad();
+       
     }//GEN-LAST:event_EliminarCiudadBActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
