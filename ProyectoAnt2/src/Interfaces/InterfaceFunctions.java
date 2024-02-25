@@ -1,7 +1,9 @@
 
 package Interfaces;
 
+import Clases.SistemaHormiga;
 import EDD.Grafo;
+import EDD.Nodo;
 import Funciones.FuncionesTxt;
 
 /**
@@ -21,6 +23,7 @@ public class InterfaceFunctions {
     private static final Guardar guardartxt= new Guardar();
     public static final FuncionesTxt fmanager = new FuncionesTxt();
     private static Grafo grafo= new Grafo();
+    
 
     public static Grafo getGrafo() {
         return grafo;
@@ -121,5 +124,6 @@ public class InterfaceFunctions {
         getMostrar().setVisible(false);
         getSimular().setVisible(false);
    }
-       
+   
+   
 }

@@ -136,6 +136,27 @@ public class Grafo {
         return null;
     }
     
+    //Eliminar ciudad de la lista de Ciudades
+    public void EliminarCiudad(Object ciudad){
+        Nodo aux= ListaCiudades.getpFirst();
+        while(aux.getPnext()!=null){
+            if(aux.getDato()==ciudad){
+                break;
+            }
+            aux=aux.getPnext();
+        }
+        if(aux.getPnext().getPnext()!=null){
+            Nodo aux3= aux.getPnext();
+            Nodo aux2= aux3.getPnext();
+            aux.setPnext(aux2);
+            aux3.setPnext(null);
+        }else{
+            aux.setPnext(null);
+        }
+        
+    }
+    
+    
     public String toString() { 
         StringBuilder sb = new StringBuilder();
         sb.append("Ciudades:\n");
