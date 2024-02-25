@@ -191,6 +191,8 @@ public class SistemaHormiga {
                     Vertice ciudadProxima = decidirCiudadProxima(ciudadesCandidatas, probabilidades);
                     Arista arista = hormiga.getCiudadActual().buscarArista2(ciudadProxima.getNumeroCiudad());
                     hormiga.visitarCiudad(ciudadProxima.getNumeroCiudad(), arista.getDistancia());
+                }else{
+                    break;
                 }
             }else{
                 break;
