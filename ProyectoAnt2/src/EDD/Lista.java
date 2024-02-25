@@ -189,6 +189,8 @@ public class Lista {
         }
     }
     
+    
+    
     public void eliminarPosicion(int posicion){
 
         if(posicion>=0 && posicion<size){
