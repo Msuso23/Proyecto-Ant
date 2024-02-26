@@ -12,15 +12,19 @@ import Funciones.Messages;
  * @author Camila Garcia
  */
 public class Simular extends javax.swing.JFrame {
-    int hormigas=0;
-    int ciclos_realizar=0;
+    //Variables auxiliares
+    int hormigas;
+    int ciclos_realizar;
     Lista hormigaslista= new Lista();
-    double a=1;
-    double b=2;
-    double r=0.5;
-    double q=0;
-    Object ciudadInicio="";
-    Object ciudadFinal="";
+    double a;
+    double b;
+    double r;
+    double q;
+    Boolean defecto=false;
+    String ciudadInicio;
+    String ciudadFinal;
+    Vertice ci;
+    Vertice cf;
 
 
     public Simular() {
@@ -30,23 +34,32 @@ public class Simular extends javax.swing.JFrame {
         CiudadesDestino.setEnabled(false);
         ciclos.setEnabled(false);
     }
+    
    
      //Metodo para llenar un ChooserCombo de ciudad de inicio
     public void LlenarCiudadesInicioChooserCombo(){
         CiudadesComboBox.removeAllItems();
         Nodo aux= InterfaceFunctions.getGrafo().getListaCiudades().getpFirst();
-        while(InterfaceFunctions.getGrafo().getListaCiudades()!=null) {
-            CiudadesComboBox.addItem((String) aux.getDato());
+        String aux2="";
+        while(aux!=null) {
+            Vertice verticeActual = (Vertice) aux.getDato();
+            aux2 = String.valueOf(String.valueOf(verticeActual.getNumeroCiudad()));
+            CiudadesComboBox.addItem(aux2);
             aux=aux.getPnext();
         }
     }
     
      //Metodo para llenar un ChooserCombo de Ciudades destino sin la de inicio
-   public void LlenarCiudadesDestinoChooserCombo(Object ciudadinicio){
+   public void LlenarCiudadesDestinoChooserCombo(int ciudadinicio){
         CiudadesDestino.removeAllItems();
         Nodo aux= InterfaceFunctions.getGrafo().getListaCiudades().getpFirst();
-        while(InterfaceFunctions.getGrafo().getListaCiudades()!=null) {  
-            CiudadesDestino.addItem((String) aux.getDato());
+        String aux2="";
+        while(aux!=null) {
+            Vertice verticeActual = (Vertice) aux.getDato();
+            aux2 = String.valueOf(String.valueOf(verticeActual.getNumeroCiudad()));
+            if(verticeActual.getNumeroCiudad()!=ciudadinicio){
+                CiudadesDestino.addItem(aux2);
+            }
             aux=aux.getPnext();
         }
     }
@@ -262,6 +275,11 @@ public class Simular extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 480));
@@ -282,7 +300,7 @@ public class Simular extends javax.swing.JFrame {
     }//GEN-LAST:event_ciclosActionPerformed
 
     private void alfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alfaActionPerformed
-        a= Double.parseDouble(alfa.getText());
+       
     }//GEN-LAST:event_alfaActionPerformed
 
     private void variablesdefectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_variablesdefectoActionPerformed
@@ -290,15 +308,16 @@ public class Simular extends javax.swing.JFrame {
         alfa.setEnabled(false);
         beta.setEnabled(false);
         rho.setEnabled(false);
-        
+        defecto=true;
+       
     }//GEN-LAST:event_variablesdefectoActionPerformed
 
     private void betaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_betaActionPerformed
-       b= Double.parseDouble(beta.getText());
+    
     }//GEN-LAST:event_betaActionPerformed
 
     private void rhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rhoActionPerformed
-        r=Double.parseDouble(rho.getText());
+        
     }//GEN-LAST:event_rhoActionPerformed
 
     private void CiudadesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CiudadesComboBoxActionPerformed
@@ -306,38 +325,52 @@ public class Simular extends javax.swing.JFrame {
     }//GEN-LAST:event_CiudadesComboBoxActionPerformed
 
     private void CiudadesDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CiudadesDestinoActionPerformed
-        ciudadFinal=CiudadesDestino.getSelectedItem().toString();
+        ciudadFinal=(String)CiudadesDestino.getSelectedItem();
     }//GEN-LAST:event_CiudadesDestinoActionPerformed
 
     private void simuladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simuladorActionPerformed
-        Vertice ci= InterfaceFunctions.getGrafo().buscarVertice2(Integer.parseInt((String) ciudadInicio));
-        Vertice cf= InterfaceFunctions.getGrafo().buscarVertice2(Integer.parseInt((String) ciudadFinal));
-        SistemaHormiga simulador = new SistemaHormiga(ciclos_realizar,hormigaslista,a,b,r,q,InterfaceFunctions.getGrafo(),ci,cf);
-        simulador.simulacion();
+        //Si selecciono que el valor es por defecto el booleano sera verdadero asi que toma valores prestablecidos, sino toma los valores ingresados
+        if (defecto==false){
+            b= Double.parseDouble(beta.getText());
+            r=Double.parseDouble(rho.getText());
+            a= Double.parseDouble(alfa.getText());
+            q=0.5;
+        }else{
+            a=1;
+            b=2;
+            r=0.5;
+            q=0.5;
+        }   
+        
+        //Buscar el vertice de las ciudades seleccionadas
+        ci= InterfaceFunctions.getGrafo().buscarVertice2(Integer.parseInt(ciudadInicio));
+        cf= InterfaceFunctions.getGrafo().buscarVertice2(Integer.parseInt(ciudadFinal));
+        //Crear el constructor de simulador
+        SistemaHormiga simul = new SistemaHormiga(ciclos_realizar,hormigaslista,a,b,r,q,InterfaceFunctions.getGrafo(),ci,cf);
+        simul.simulacion();
     }//GEN-LAST:event_simuladorActionPerformed
 
     private void ciclosOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciclosOKActionPerformed
          //Un try cath para que acepte solo numeros
         try{
            ciclos_realizar=Integer.parseInt(ciclos.getText());
-           //Una vez seleccionado los ciclos el Chooser Combo se llena con las ciudades para elegir la de inicio
-           LlenarCiudadesInicioChooserCombo();
-        
         }
         catch(Exception e){
             Messages.error("El valor a ingresar debe ser un numero");
         }
+        //Una vez seleccionado los ciclos el Chooser Combo se llena con las ciudades para elegir la de inicio
+        LlenarCiudadesInicioChooserCombo();
     }//GEN-LAST:event_ciclosOKActionPerformed
 
     private void ciOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciOKActionPerformed
         //Una vez seleccionada la ciudad de inicio se llena el Combo box para elegir la ciudad destino
-        ciudadInicio=CiudadesComboBox.getSelectedItem().toString(); 
+        ciudadInicio=(String) CiudadesComboBox.getSelectedItem(); 
         CiudadesDestino.setEnabled(true);
-        LlenarCiudadesDestinoChooserCombo(ciudadInicio);
+        LlenarCiudadesDestinoChooserCombo(Integer.parseInt(ciudadInicio));
     }//GEN-LAST:event_ciOKActionPerformed
 
     private void cantidadhormigasOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadhormigasOKActionPerformed
-        
+        //Agrego en una lista cada hormiga diferenciada por numeros
          try{
             hormigas= Integer.parseInt(cantidadHormigas.getText());
             for (int i = 1; i < hormigas+1; i++) {
@@ -350,6 +383,10 @@ public class Simular extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_cantidadhormigasOKActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
