@@ -5,6 +5,7 @@ import Clases.SistemaHormiga;
 import EDD.Lista;
 import EDD.Nodo;
 import EDD.Vertice;
+import Funciones.FuncionesSistemaHormiga;
 import Funciones.Messages;
 
 /**
@@ -25,6 +26,8 @@ public class Simular extends javax.swing.JFrame {
     String ciudadFinal;
     Vertice ci;
     Vertice cf;
+    
+    FuncionesSistemaHormiga func = new FuncionesSistemaHormiga();
 
 
     public Simular() {
@@ -346,6 +349,9 @@ public class Simular extends javax.swing.JFrame {
         ci= InterfaceFunctions.getGrafo().buscarVertice2(Integer.parseInt(ciudadInicio));
         cf= InterfaceFunctions.getGrafo().buscarVertice2(Integer.parseInt(ciudadFinal));
         //Crear el constructor de simulador
+        Lista hormigaslista = func.inicializarHormigas(hormigas, ci);
+        func.inicializarFeromonas(InterfaceFunctions.getGrafo());
+        
         SistemaHormiga simul = new SistemaHormiga(ciclos_realizar,hormigaslista,a,b,r,q,InterfaceFunctions.getGrafo(),ci,cf);
         simul.simulacion();
     }//GEN-LAST:event_simuladorActionPerformed
