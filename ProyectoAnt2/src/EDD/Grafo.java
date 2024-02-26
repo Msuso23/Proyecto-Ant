@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package EDD;
 
-import javax.swing.JOptionPane;
+import EDD.Lista;
+import EDD.Vertice;
+import Funciones.Messages;
 
 /**
  *
@@ -30,50 +29,51 @@ public class Grafo {
     }
 
     
-    // Se utiliza para verificar si un vértice con un número de ciudad específico existe en el grafo.
+    // Sirve para verificar si un vértice dado está presente en la lista de vértices
+    
     public boolean isVertex(Vertice ciudades) {
-        if (isEmpty()) {
-            return false;
-        } else {
-            int numVert = ciudades.getNumeroCiudad();
+        
+            int numeroVertice = ciudades.getNumeroCiudad();
 
             for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
                 Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
-                if (vertex.getNumeroCiudad() == numVert) {
+                if (vertex.getNumeroCiudad() == numeroVertice) {
                     return true;
                 }
             }
             return false;
         }
-    }
     
     //Agregar ciudad al grafo
 
     public void agregarVertice(Vertice ciudades) { 
         if (!isVertex(ciudades)) {
             ListaCiudades.insertarFinal(ciudades);
-            JOptionPane.showMessageDialog(null, "Vertice insertado con exito.");
+            Messages.information("Vertice insertado con exito.");
 
         } else {
-            JOptionPane.showMessageDialog(null, "El vertice ya existe");
+            Messages.information("El vertice ya existe");
         }
     }
     
     
-     //Eliminar ciudad al grafo
+     //Eliminar ciudad del grafo
             
     public void eliminarVertice(Vertice ciudad) {
         if (isEmpty()) {
-            System.out.println("El grafo está vacío. No hay vértices que eliminar.");
+            Messages.error("El grafo está vacío. No hay vértices que eliminar.");
+            
         } else if (isVertex(ciudad)) {
             ListaCiudades.eliminarReferencia(ciudad);
-            JOptionPane.showMessageDialog(null, "Vértice eliminado con éxito.");
+            Messages.information("Vértice eliminado con éxito.");
         } else {
-            JOptionPane.showMessageDialog(null, "El vértice no existe en el grafo.");
+            Messages.error("El vértice no existe en el grafo.");
         }
     }
     
-    public boolean buscarArista(Arista arista) {  //Aca falta que cristian haga el metodo de buscar arista para queme salga bine
+    // Busca una arista dada en la lista de adyacencia del grafo
+    
+    public boolean buscarArista(Arista arista) {  
         for (int i = 0; i < ListaCiudades.getSize(); i++) {
             Vertice vertice = (Vertice) ListaCiudades.getValor(i);
             if (vertice.buscarArista(arista) == 1) {
@@ -83,6 +83,8 @@ public class Grafo {
 
         return false;
     }
+    
+    // Agrega una nueva arista al grafo si no existe previamente
     
     public void agregarArista(Arista arista) {
         if (!buscarArista(arista)) {
@@ -95,29 +97,32 @@ public class Grafo {
                     ciudades.getList_ady().insertarFinal(arista2);
                 }
             }
+            Messages.information("Arista agregada.");
             
-            JOptionPane.showMessageDialog(null, "Arista agregada.");
             
         } else {
-            JOptionPane.showMessageDialog(null, "La Arista ya existe");
+            Messages.error("La Arista ya existe");
+       
         }
     }
     
-        public void eliminarArista(Arista arista){
+    // Elimina una arista del grafo si existe
+    
+    public void eliminarArista(Arista arista){
        if (buscarArista(arista)) {
             for (int i = 0; i < ListaCiudades.getSize(); i++) {
                 Vertice ciudades = (Vertice) ListaCiudades.getValor(i);
                 if (ciudades.getNumeroCiudad() == arista.getCiudadInicio().getNumeroCiudad()) {
                     ciudades.getList_ady().eliminarReferencia(arista);
                 }else if(ciudades.getNumeroCiudad()== arista.getCiudadDestino().getNumeroCiudad()){
-                    Arista arista2 = new Arista(ciudades, arista.getCiudadInicio(), arista.getDistancia());
+                    Arista arista2 = new Arista(ciudades, arista.getCiudadInicio(), arista.getDistancia()); 
                     ciudades.getList_ady().eliminarReferencia(arista2);
                 }
             }
-            JOptionPane.showMessageDialog(null, "Arista eliminada.");
+            Messages.information("Arista eliminada.");
             
         } else {
-            JOptionPane.showMessageDialog(null, "La Arista no existe.");
+           Messages.error("La Arista no existe.");
         }
     }
 
@@ -132,6 +137,7 @@ public class Grafo {
         }
         return null;
     }
+    
     
     public String toString() { 
         StringBuilder sb = new StringBuilder();

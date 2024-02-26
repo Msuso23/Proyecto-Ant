@@ -1,25 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package Main;
 
-import Interfaces.Bienvenida;
+import Interfaces.InterfaceFunctions;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
+ * @author Cristian Gouveia
  * @author nicolepinto
+ * @author Camila Garcia 
  */
 public class ProyectoAnt {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-
-        Bienvenida ventana = new Bienvenida();
-        ventana.setVisible(true);
-
+        updateAppareance();
+        InterfaceFunctions.openBienvenida();
     }
-    
+
+    public static void updateAppareance() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+        }
+    }
 }
