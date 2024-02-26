@@ -30,13 +30,13 @@ public class CargarTXT extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        guardarB = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        report = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Volver = new javax.swing.JButton();
-        guardarB = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        report = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,30 +45,6 @@ public class CargarTXT extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(243, 219, 195));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("ISOCPEUR", 1, 24)); // NOI18N
-        jLabel1.setText("Cargar txt");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carga-de-archivos (1).png"))); // NOI18N
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
-
-        Volver.setBackground(new java.awt.Color(0, 0, 0));
-        Volver.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        Volver.setForeground(new java.awt.Color(255, 51, 0));
-        Volver.setText("<Menu");
-        Volver.setBorder(null);
-        Volver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
-
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 90));
 
         guardarB.setBackground(new java.awt.Color(0, 0, 0));
         guardarB.setText("Cargar");
@@ -89,6 +65,30 @@ public class CargarTXT extends javax.swing.JFrame {
         jScrollPane2.setViewportView(report);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 300, 130));
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("ISOCPEUR", 1, 36)); // NOI18N
+        jLabel1.setText("Cargar txt");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 21, 160, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carga-de-archivos (1).png"))); // NOI18N
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+
+        Volver.setBackground(new java.awt.Color(0, 0, 0));
+        Volver.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        Volver.setForeground(new java.awt.Color(255, 51, 0));
+        Volver.setText("<Menu");
+        Volver.setBorder(null);
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 90));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
