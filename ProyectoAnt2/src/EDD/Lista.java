@@ -92,32 +92,31 @@ public class Lista {
         }
     }
     
+// Permite insertar un nuevo nodo después de un nodo específico en la lista enlazada
+    
+    public void insertarReferencia(Object ref, Object valor) {
 
-        public void insertarReferencia(Object ref,Object valor){
-        
         Nodo nuevo = new Nodo();
         nuevo.setDato(valor);
-        
+
         if (!isEmpty()) {
             if (buscar(ref)) {
                 Nodo aux = pFirst;
-                // Recorre la lista hasta llegar al nodo de referencia.
                 while (aux.getDato() != ref) {
                     aux = aux.getPnext();
                 }
-                // Crea un respaldo de la continuación de la lista.
                 Nodo siguiente = aux.getPnext();
-                // Enlaza el nuevo nodo despues del nodo de referencia.
                 aux.setPnext(nuevo);
-                // Une la continuacion de la lista al nuevo nodo.
                 nuevo.setPnext(siguiente);
-            
+
                 size++;
             }
         }
     }
     
-        
+    // Transforma los datos almacenados en la lista en una cadena de caracteres para su visualización, 
+    // línea por línea, y devuelve esta representación como un String
+    
     public String Transformar(){
         if(!isEmpty()){
             
@@ -132,6 +131,10 @@ public class Lista {
         }
         return "Lista vacia";
     }
+    
+    //Transforma los datos almacenados en la lista en una representación de cadena de caracteres para su visualización, 
+    //donde los nombres de las ciudades están separados por comas
+    
     public String transformarCiudad(){
         if (!isEmpty()){
             
@@ -147,6 +150,8 @@ public class Lista {
         return "Lista Vacia";
     }
 
+    //Elimina el primer nodo de la lista. Si la lista no está vacía, mueve el puntero pFirst al siguiente nodo en la lista y reduce el tamaño
+    
     public boolean eliminarInicio(){
         if(!isEmpty()){
             pFirst = pFirst.getPnext();
@@ -156,6 +161,8 @@ public class Lista {
             return false;
         }
     }
+    
+    //Elimina el último nodo de la lista. Si la lista no está vacía, elimina el último nodo ajustando los punteros
     
     public void eliminarFinal(){
         if(!isEmpty()){
@@ -171,6 +178,8 @@ public class Lista {
         }
         size --;
     }
+    
+    //Elimina el nodo que contiene el dato de referencia pasado como argumento
     
     public void eliminarReferencia(Object referencia){
 
@@ -189,7 +198,7 @@ public class Lista {
         }
     }
     
-    
+    //Elimina el nodo en la posición especificada
     
     public void eliminarPosicion(int posicion){
 
@@ -209,6 +218,8 @@ public class Lista {
         }
     }
     
+    // Edita el valor del nodo que contiene la referencia especificada, cambiándolo por el dato pasado como argumento
+    
     public void editarReferencia(Object referencia, Object dato){
         if (buscar(referencia)) {
             Nodo aux = pFirst;
@@ -218,6 +229,8 @@ public class Lista {
             aux.setDato(dato);
         }
     }
+    
+    // Edita el valor del nodo en la posición especificada por el dato pasado como argumento
     
     public void editarPosicion(int posicion , Object dato){
 
@@ -236,6 +249,7 @@ public class Lista {
         }
     }
     
+    // Devuelve el valor almacenado en el nodo en la posición especificada
     
     public Object getValor(int posicion){
 
@@ -254,42 +268,7 @@ public class Lista {
         return null;
     }
     
-    
-    public Nodo getNodo(int posicion){
-
-        if(posicion>=0 && posicion<size){
-            
-            if (posicion == 0) {
-                return pFirst;
-            }else{
-                Nodo aux = pFirst;
-                for (int i = 0; i < posicion; i++) {
-                    aux = aux.getPnext();
-                }
-                return aux;
-            }
-        }
-        return null;
-    }
-    
-    
-    public int getIndex (Nodo nodito){
-        if (!isEmpty()){
-            Nodo aux = pFirst;
-            int count = 0;
-            while(aux != null){
-                
-                if (nodito == aux){
-                    return count;     
-                }
-                count ++;
-                aux = aux.getPnext();
-            }
-            return -1;
-        }
-    return -1;
-    }
-    
+    // Devuelve la posición del nodo que contiene el dato de referencia pasado como argumento
     
     public int getPosicion(Object referencia){
 
@@ -307,6 +286,7 @@ public class Lista {
         }
     }
     
+    // Busca la referencia en la lista y devuelve true si se encuentra, false en caso contrario
     
     public boolean buscar(Object referencia){
         Nodo aux = pFirst;

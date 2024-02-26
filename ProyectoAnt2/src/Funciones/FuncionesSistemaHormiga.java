@@ -20,8 +20,7 @@ public class FuncionesSistemaHormiga {
     public Lista inicializarHormigas(int numeroHormigas, Vertice ciudadInicio){
         Lista hormigas = new Lista();
         for (int i = 0; i < numeroHormigas; i++) {
-            Hormiga hormiga = new Hormiga();
-            hormiga.setCiudadActual(ciudadInicio);
+            Hormiga hormiga = new Hormiga(ciudadInicio);
             hormigas.insertarFinal(hormiga);
         }
         return hormigas;
