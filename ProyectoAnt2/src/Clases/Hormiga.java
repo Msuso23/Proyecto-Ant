@@ -23,6 +23,13 @@ public class Hormiga {
         this.CiudadesRecorridas = new Lista();
         this.longitud = 0;
     }
+    
+    public Hormiga(Vertice ciudadActual){
+        this.ciudadActual = ciudadActual;
+        this.CiudadesRecorridas = new Lista();
+        this.CiudadesRecorridas.insertarFinal(ciudadActual);
+        this.longitud = 0;
+    }
 
     //Getters y Setters
     
