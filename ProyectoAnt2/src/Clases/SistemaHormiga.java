@@ -8,6 +8,7 @@ import EDD.Arista;
 import EDD.Grafo;
 import EDD.Lista;
 import EDD.Vertice;
+import java.util.Random;
 
 /**
  *
@@ -27,7 +28,6 @@ public class SistemaHormiga {
     private double distanciaOptima;
     private Lista historial;
     private Lista historialTemporal;
-    
 
     public SistemaHormiga(int ciclos, Lista hormigas, double a, double b, double r, double q, Grafo grafo, Vertice ciudadInicial, Vertice ciudadFinal) {
         this.ciclos = ciclos;
@@ -148,171 +148,169 @@ public class SistemaHormiga {
     public void setHistorialTemporal(Lista historialTemporal) {
         this.historialTemporal = historialTemporal;
     }
-
     
+   
+
     //Se encarga iniciar el recorrido de cada hormiga y llevar el record de los mismos
     public void simulacion() {
         for (int i = 0; i < this.ciclos; i++) {
-            String titulo = "Ciclo " + (i+1);
+            String titulo = "Ciclo " + (i + 1);
             for (int j = 0; j < hormigas.getSize(); j++) {
                 Hormiga hormigaActual = (Hormiga) hormigas.getValor(j);
-                this.recorridoCompleto(hormigaActual);  
+                this.recorridoCompleto(hormigaActual);
                 HistorialHormiga historial = new HistorialHormiga(j, hormigaActual.getCiudadesRecorridas().transformarCiudad(), String.valueOf(hormigaActual.getLongitud()));
                 historialTemporal.insertarFinal(historial);
             }
-            Historial historial2 = new Historial (titulo,historialTemporal.Transformar(),this.recorridoOptimo.transformarCiudad(),this.distanciaOptima);
-            this.historial.insertarFinal(historial2);
+            Historial historial2 = new Historial(titulo, historialTemporal.Transformar(), this.recorridoOptimo.transformarCiudad(), this.distanciaOptima);            this.historial.insertarFinal(historial2);
             this.evaporacionFeromonas();
             this.reiniciarHormigas();
             this.historialTemporal.vaciar();
         }
     }
-     
-    
-    //Establece los valores predeterminados de cada hormiga
-    public void reiniciarHormigas(){
-        for (int i = 0; i < hormigas.getSize(); i++) {
-            Hormiga hormiga = (Hormiga) hormigas.getValor(i);
-            hormiga.setCiudadActual(ciudadInicial);
-            hormiga.getCiudadesRecorridas().vaciar();
-            hormiga.setLongitud(0);
-            hormigas.editarPosicion(i, hormiga);
-        }
-    }
-    
-    
-    //Realiza un recorrido completo del grafo utilizando una hormiga, siguiendo el algoritmo de la colonia de hormigas.
+
+
+
     public void recorridoCompleto(Hormiga hormiga) {
-        for (int i = 0; i < grafo.getListaCiudades().getSize(); i++) {
-            if(hormiga.getCiudadActual().getNumeroCiudad() != ciudadFinal.getNumeroCiudad()){
+        for (int i = 0; i < this.grafo.getListaCiudades().getSize(); i++) {
+            if (hormiga.getCiudadActual().getNumeroCiudad() != this.ciudadFinal.getNumeroCiudad()) {
                 Lista ciudadesCandidatas = ciudadesCandidatas(hormiga);
-                if(ciudadesCandidatas.getSize() != 0){
-                    Lista probabilidades = probabilidades(ciudadesCandidatas);
-                    Vertice ciudadProxima = decidirCiudadProxima(ciudadesCandidatas, probabilidades);
-                    Arista arista = hormiga.getCiudadActual().buscarArista2(ciudadProxima.getNumeroCiudad());
-                    hormiga.visitarCiudad(ciudadProxima.getNumeroCiudad(), arista.getDistancia());
-                }else{
-                    break;
+                if (ciudadesCandidatas.getpFirst() != null) {
+                    Lista probs = probabilidades(ciudadesCandidatas);
+                    Arista arista = decidirCiudad(probs, ciudadesCandidatas);
+                    hormiga.visitarCiudad(arista.getCiudadDestino().getNumeroCiudad(), arista.getDistancia());
                 }
-            }else{
-                break;
             }
         }
-        if(distanciaOptima == 0){
+
+        if (this.distanciaOptima == 0) {
             this.setDistanciaOptima(hormiga.getLongitud());
             this.setRecorridoOptimo(hormiga.getCiudadesRecorridas());
-        }else{
-            if(hormiga.getLongitud()< this.getDistanciaOptima() && hormiga.getCiudadActual().getNumeroCiudad()== this.ciudadFinal.getNumeroCiudad()){
-                this.setDistanciaOptima(hormiga.getLongitud());
+        } else {
+            if (hormiga.getLongitud() < this.distanciaOptima && hormiga.getCiudadActual().getNumeroCiudad() == this.ciudadFinal.getNumeroCiudad()) {
                 this.setRecorridoOptimo(hormiga.getCiudadesRecorridas());
+                this.setDistanciaOptima(hormiga.getLongitud());
             }
-        }
-        
-        this.incrementoFeromonas(hormiga);
 
+        }
+
+        this.incrementarFeromonas(hormiga);
     }
 
-    
-    //Obtiene una lista de ciudades candidatas a visitar por la hormiga, a partir de la ciudad actual en la que se encuentra.
     public Lista ciudadesCandidatas(Hormiga hormiga) {
-        Vertice ciudadActual = hormiga.getCiudadActual();
+
         Lista ciudadesCandidatas = new Lista();
-        
-        for (int i = 0; i < ciudadActual.getList_ady().getSize(); i++) {
-            Arista aristaActual = (Arista) ciudadActual.getList_ady().getValor(i);
-            if(!hormiga.visitado(aristaActual.getCiudadDestino().getNumeroCiudad())){
-                ciudadesCandidatas.insertarFinal(aristaActual);
+
+        if (grafo.buscarVertice2(hormiga.getCiudadActual().getNumeroCiudad()) != null) {
+            Lista ListAdy = grafo.buscarVertice2(hormiga.getCiudadActual().getNumeroCiudad()).getList_ady();
+            for (int i = 0; i < ListAdy.getSize(); i++) {
+                Arista aristaActual = (Arista) ListAdy.getValor(i);
+                if (!hormiga.visitado(aristaActual.getCiudadDestino().getNumeroCiudad())) {
+                    ciudadesCandidatas.insertarFinal(ListAdy.getValor(i));
+                }
             }
+            return ciudadesCandidatas;
+        } else {
+            return null;
         }
-        
-        return ciudadesCandidatas;
-    }
-    
-    
-    //Ejecuta la operacion matematica propuesta en cada ciudad candidata, de esta forma decide cual es mas apta
-    public Lista probabilidades(Lista ciudadesCandidatas) {
-        double sumaProbabilidades = 0;
-        Lista probabilidades = new Lista();
-        
-        for (int i = 0; i < ciudadesCandidatas.getSize(); i++) {
-            Arista aristaActual = (Arista) ciudadesCandidatas.getValor(i);
-            double t = Math.pow(aristaActual.getFeromonas(), this.a);
-            double n = Math.pow(this.q/aristaActual.getDistancia(), this.b);
-            double probabilidad = t * n;
-            sumaProbabilidades += probabilidad;
-            probabilidades.insertarFinal(probabilidad);
-        }
-        
-        for (int i = 0; i < probabilidades.getSize(); i++) {
-            double probActual = (double) probabilidades.getValor(i) / sumaProbabilidades;
-            probabilidades.editarReferencia(probabilidades.getValor(i), probActual);
-        }
-        
-        return probabilidades;
-    }
-        
-    //Cicla entre ciudades hasta obtener la mejor ruta segun la probabilidad
-    public Vertice decidirCiudadProxima(Lista ciudadesCandidatas, Lista probabilidades){
-        int posicion = -1;
-        double mayorPorbabilidad = 0;
-        
-        for (int i = 0; i < probabilidades.getSize(); i++) {
-            double probActual = (double) probabilidades.getValor(i);
-            if(probActual > mayorPorbabilidad){
-                mayorPorbabilidad = probActual;
-                posicion = i;         
-            }
-        }
-        
-        Arista aristaFinal = (Arista) ciudadesCandidatas.getValor(posicion);
-        
-        return aristaFinal.getCiudadDestino();
     }
 
-  
-    
+    /**
+     * Calcula las probabilidades asociadas a cada arista en la lista de
+     * ciudades candidatas. Permite determinar la probabilidad de elección de un
+     * camino u otro.
+     *
+     * @param ciudadesCandidatas La lista de ciudades candidatas.
+     * @return Una lista de probabilidades asociadas a cada arista en la lista
+     * de ciudades candidatas.
+     */
+    public Lista probabilidades(Lista ciudadesCandidatas) {
+        Lista probsindividir = new Lista();
+
+        Lista ciudadesProbabilidades = new Lista();
+
+        double sumatoria = 0;
+
+        for (int i = 0; i < ciudadesCandidatas.getSize(); i++) {
+            Arista arista = (Arista) ciudadesCandidatas.getValor(i);
+
+            double probabilidad = Math.pow(arista.getFeromonas(), this.a) * Math.pow(1 / arista.getDistancia(), this.b);
+            probsindividir.insertarFinal(probabilidad);
+            sumatoria += probabilidad;
+        }
+
+        for (int i = 0; i < probsindividir.getSize(); i++) {
+            double probabilidadCiudad = ((double) probsindividir.getValor(i)) / sumatoria;
+            ciudadesProbabilidades.insertarFinal(probabilidadCiudad);
+        }
+
+        return ciudadesProbabilidades;
+    }
+
+    public Arista decidirCiudad(Lista probabilidades, Lista ciudadesCandidatas) {
+        Lista index = new Lista();
+        double probMayor = 0.0;
+
+        for (int i = 0; i < probabilidades.getSize(); i++) {
+            double probActual =  (double) probabilidades.getValor(i);
+            if (probActual > probMayor || probActual == probMayor) {
+                probMayor = probActual;
+                index.insertarFinal(i);
+            }
+        }
+        Random randomNumbers = new Random();
+        int indexArista = randomNumbers.nextInt(index.getSize());
         
-    //Actualiza las feromonas de los caminos entre ciudades luego de que las hormigas hacen su recorrido
-    public void evaporacionFeromonas(){
+        Arista aristaFinal = (Arista) ciudadesCandidatas.getValor(indexArista);
+        return aristaFinal;
+    }
+
+    /**
+     * Reinicia el estado de todas las hormigas al inicio del recorrido.
+     */
+    public void reiniciarHormigas() {
+        for (int i = 0; i < this.hormigas.getSize(); i++) {
+            Hormiga hormigaActual = (Hormiga) this.hormigas.getValor(i);
+            hormigaActual.setCiudadActual(this.getCiudadInicial());
+            hormigaActual.setLongitud(0);
+            hormigaActual.getCiudadesRecorridas().vaciar();;
+
+        }
+    }
+
+    /**
+     * Evapora las feromonas en todas las aristas del grafo.
+     */
+    public void evaporacionFeromonas() {
+        // arista verificar si destino > origen
         for (int i = 0; i < grafo.getListaCiudades().getSize(); i++) {
             Vertice ciudadActual = (Vertice) grafo.getListaCiudades().getValor(i);
             for (int j = 0; j < ciudadActual.getList_ady().getSize(); j++) {
                 Arista aristaActual = (Arista) ciudadActual.getList_ady().getValor(j);
-                double evaporar = (1-r)*aristaActual.getFeromonas();
-                aristaActual.setFeromonas(evaporar);
+                if (ciudadActual.getNumeroCiudad()< aristaActual.getCiudadDestino().getNumeroCiudad()) {
+                    double newFeromonas = (1.0 - this.r) * aristaActual.getFeromonas();
+                    aristaActual.setFeromonas(newFeromonas);
+                }
             }
         }
     }
-    
-    //Funcion que realiza un incremento de feromonas en los caminos que son recorridos por una hormiga
-    public void incrementoFeromonas(Hormiga hormiga){
-        double contribucion = q/hormiga.getLongitud();
-        for (int i = 0; i < hormiga.getCiudadesRecorridas().getSize()-1; i++) {
-            Vertice ciudadActual= (Vertice) hormiga.getCiudadesRecorridas().getValor(i);
-            Vertice ciudadSiguiente = (Vertice) hormiga.getCiudadesRecorridas().getValor(i+1);
-            
-            int aux=ciudadActual.buscarArista2(ciudadSiguiente.getNumeroCiudad()).getCiudadDestino().getNumeroCiudad();
-            
-            double feromonasTotales = contribucion + aux;
-            ciudadActual.buscarArista2(ciudadSiguiente.getNumeroCiudad()).setFeromonas(feromonasTotales);
+
+    /**
+     * Incrementa las feromonas en las aristas recorridas por la hormiga.
+     *
+     * @param hormiga La hormiga a utilizar en el recorrido completo.
+     */
+    public void incrementarFeromonas(Hormiga hormiga) {
+        double visibilidad = q / hormiga.getLongitud();
+
+        for (int i = 0; i < hormiga.getCiudadesRecorridas().getSize() - 1; i++) {
+            Vertice ciudadActual = (Vertice) hormiga.getCiudadesRecorridas().getValor(i);
+            Vertice siguienteCiudad = (Vertice) hormiga.getCiudadesRecorridas().getValor(i + 1);
+
+            double totalFeromonas = visibilidad + ciudadActual.buscarArista2(siguienteCiudad.getNumeroCiudad()).getFeromonas();
+            ciudadActual.buscarArista2(siguienteCiudad.getNumeroCiudad()).setFeromonas(totalFeromonas);
         }
-        
-        
-        
     }
 
-    //Se encarga de pasar el historial de lista a string
-    public String toStringHistorial(){
-        String historialCompleto = "";
-        for (int i = 0; i <this.historial.getSize(); i++) {
-            Historial historial = (Historial) this.historial.getValor(i);
-            historialCompleto += historial.toString() + ("\n");
-        }
-        return historialCompleto;
-    }
-        
-        
-    
 }
   
   
