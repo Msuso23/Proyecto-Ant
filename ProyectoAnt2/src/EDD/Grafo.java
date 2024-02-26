@@ -29,22 +29,20 @@ public class Grafo {
     }
 
     
-    // Se utiliza para verificar si un vértice con un número de ciudad específico existe en el grafo.
+    // Sirve para verificar si un vértice dado está presente en la lista de vértices
+    
     public boolean isVertex(Vertice ciudades) {
-        if (isEmpty()) {
-            return false;
-        } else {
-            int numVert = ciudades.getNumeroCiudad();
+        
+            int numeroVertice = ciudades.getNumeroCiudad();
 
             for (int indice = 0; indice < ListaCiudades.getSize(); indice++) {
                 Vertice vertex = (Vertice) ListaCiudades.getValor(indice);
-                if (vertex.getNumeroCiudad() == numVert) {
+                if (vertex.getNumeroCiudad() == numeroVertice) {
                     return true;
                 }
             }
             return false;
         }
-    }
     
     //Agregar ciudad al grafo
 
@@ -55,13 +53,11 @@ public class Grafo {
 
         } else {
             Messages.information("El vertice ya existe");
-            
-            
         }
     }
     
     
-     //Eliminar ciudad al grafo
+     //Eliminar ciudad del grafo
             
     public void eliminarVertice(Vertice ciudad) {
         if (isEmpty()) {
@@ -75,6 +71,8 @@ public class Grafo {
         }
     }
     
+    // Busca una arista dada en la lista de adyacencia del grafo
+    
     public boolean buscarArista(Arista arista) {  
         for (int i = 0; i < ListaCiudades.getSize(); i++) {
             Vertice vertice = (Vertice) ListaCiudades.getValor(i);
@@ -85,6 +83,8 @@ public class Grafo {
 
         return false;
     }
+    
+    // Agrega una nueva arista al grafo si no existe previamente
     
     public void agregarArista(Arista arista) {
         if (!buscarArista(arista)) {
@@ -106,14 +106,16 @@ public class Grafo {
         }
     }
     
-        public void eliminarArista(Arista arista){
+    // Elimina una arista del grafo si existe
+    
+    public void eliminarArista(Arista arista){
        if (buscarArista(arista)) {
             for (int i = 0; i < ListaCiudades.getSize(); i++) {
                 Vertice ciudades = (Vertice) ListaCiudades.getValor(i);
                 if (ciudades.getNumeroCiudad() == arista.getCiudadInicio().getNumeroCiudad()) {
                     ciudades.getList_ady().eliminarReferencia(arista);
                 }else if(ciudades.getNumeroCiudad()== arista.getCiudadDestino().getNumeroCiudad()){
-                    Arista arista2 = new Arista(ciudades, arista.getCiudadInicio(), arista.getDistancia());
+                    Arista arista2 = new Arista(ciudades, arista.getCiudadInicio(), arista.getDistancia()); 
                     ciudades.getList_ady().eliminarReferencia(arista2);
                 }
             }
@@ -135,6 +137,7 @@ public class Grafo {
         }
         return null;
     }
+    
     
     public String toString() { 
         StringBuilder sb = new StringBuilder();

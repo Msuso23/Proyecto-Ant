@@ -1,35 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Interfaces;
 
 import EDD.Grafo;
 import EDD.Nodo;
+import EDD.Vertice;
+import Funciones.Messages;
 
 /**
  *
  * @author Camila Garcia
  */
 public class EliminarCiudad extends javax.swing.JFrame {
-    Object ciudadborrar="";
 
     public EliminarCiudad() {
         initComponents();
      
         this.setLocationRelativeTo(null);
-        this.setResizable(false); 
+        this.setResizable(false);
         
     }
     
-    public void LlenarCiudadesChooserCombo(Grafo g){
-      CiudadesComboBox.removeAllItems();
-      Nodo aux= g.getListaCiudades().getpFirst();
-      while(g.getListaCiudades()!=null) {
-          CiudadesComboBox.addItem((String) aux.getDato());
-          aux=aux.getPnext();
-      }
-  }
+     //Metodo para llenar un ChooserCombo
+    public void LlenarCiudadesChooserCombo(){
+        Nodo aux= InterfaceFunctions.getGrafo().getListaCiudades().getpFirst();
+        String aux2="";
+        while(aux!=null) {
+            Vertice verticeActual= (Vertice) aux.getDato();
+            aux2 = String.valueOf(String.valueOf(verticeActual.getNumeroCiudad()));
+            CiudadesComboBox.addItem((String)aux2);
+            aux=aux.getPnext();
+        }
+    }
+ 
 
 
     @SuppressWarnings("unchecked")
@@ -39,11 +41,12 @@ public class EliminarCiudad extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         CiudadesComboBox = new javax.swing.JComboBox<>();
+        Eliminar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Volver = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
+        EliminarOK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,14 +62,25 @@ public class EliminarCiudad extends javax.swing.JFrame {
                 CiudadesComboBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(CiudadesComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 90, -1));
+        jPanel2.add(CiudadesComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 90, -1));
+
+        Eliminar.setBackground(new java.awt.Color(0, 0, 0));
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 90, -1));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("ISOCPEUR", 1, 36)); // NOI18N
-        jLabel1.setText("Eliminar Ciudad");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, 40));
+        jLabel3.setFont(new java.awt.Font("ISOCPEUR", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Eliminar Ciudad");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, -1, -1));
@@ -85,9 +99,14 @@ public class EliminarCiudad extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 70));
 
-        Eliminar.setBackground(new java.awt.Color(0, 0, 0));
-        Eliminar.setText("Eliminar");
-        jPanel2.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 90, -1));
+        EliminarOK.setBackground(new java.awt.Color(0, 0, 0));
+        EliminarOK.setText("OK");
+        EliminarOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarOKActionPerformed(evt);
+            }
+        });
+        jPanel2.add(EliminarOK, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 90, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
@@ -101,11 +120,20 @@ public class EliminarCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void CiudadesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CiudadesComboBoxActionPerformed
-        LlenarCiudadesChooserCombo(InterfaceFunctions.getGrafo());
-        ciudadborrar=(Object)CiudadesComboBox.getSelectedItem().toString();
-        Grafo g=InterfaceFunctions.getGrafo();
-        g.getListaCiudades().eliminarReferencia(ciudadborrar);
+
     }//GEN-LAST:event_CiudadesComboBoxActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+         LlenarCiudadesChooserCombo();
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void EliminarOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarOKActionPerformed
+        String seleccion = (String) CiudadesComboBox.getSelectedItem();
+        int numVertice = Integer.parseInt(seleccion);
+        Vertice vertice = InterfaceFunctions.getGrafo().buscarVertice2(numVertice);
+        InterfaceFunctions.getGrafo().eliminarVertice(vertice);
+        InterfaceFunctions.VolverMenu();
+    }//GEN-LAST:event_EliminarOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,9 +173,10 @@ public class EliminarCiudad extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CiudadesComboBox;
     private javax.swing.JButton Eliminar;
+    private javax.swing.JButton EliminarOK;
     private javax.swing.JButton Volver;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
