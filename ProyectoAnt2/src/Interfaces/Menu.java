@@ -190,6 +190,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.dispose();
+        System.exit(0);
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void SimularBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimularBActionPerformed
