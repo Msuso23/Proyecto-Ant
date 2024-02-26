@@ -172,36 +172,16 @@ public class AgregarCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void CiudadesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CiudadesComboBoxActionPerformed
-        agregarCiudadB.setEnabled(false);
-        ciudadconectar=CiudadesComboBox.getSelectedItem().toString(); 
+     
+       
     }//GEN-LAST:event_CiudadesComboBoxActionPerformed
 
     private void agregarCiudadBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCiudadBActionPerformed
-        
+        LlenarCiudadesChooserCombo();
         CiudadesComboBox.setEnabled(true);
         ciudadconecta.setEnabled(true);
         distancia.setEnabled(true);
-        
-        int numCiudad= Integer.parseInt(ciudadnueva.getText());
-        
-        if (InterfaceFunctions.getGrafo().buscarVertice2(numCiudad)==null){
-            LlenarCiudadesChooserCombo();
-            Vertice nuevoVertice = new Vertice(numCiudad);
-            InterfaceFunctions.getGrafo().agregarVertice(nuevoVertice);
-            
-            ciudadagregar = ciudadnueva.getText().toString();
-            int ca = Integer.parseInt(ciudadagregar);
-            ciudadagregarv = InterfaceFunctions.getGrafo().buscarVertice2(ca);
-        }else{
-            Messages.error("El vertice ya existe");
-            
-
-            agregarCiudadB.setEnabled(true);
-            ciudadnueva.setText("");
-            InterfaceFunctions.VolverMenu();
-
-            
-        }
+      
             
         
     }//GEN-LAST:event_agregarCiudadBActionPerformed
@@ -212,42 +192,65 @@ public class AgregarCiudad extends javax.swing.JFrame {
 
     private void ciudadconectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadconectaActionPerformed
     //Busco en la lista el vertice que pertenece al numero de ciudad a conectar
+    ciudadconectar=CiudadesComboBox.getSelectedItem().toString(); 
     int cc = Integer.parseInt(ciudadconectar);
     ciudadconectarv = InterfaceFunctions.getGrafo().buscarVertice2(cc);
     
 
     
     //Guardo el valor de distancia entre ciudades
-    try {
-        distanciaentreciudades = Double.parseDouble(distancia.getText());
-        double x = 1/Integer.parseInt(distancia.getText());
-        double y =  Math.sqrt(Integer.parseInt(distancia.getText()));
-        //Creo el camino entre la ciudad nueva y la que quiero conectar
-    Arista nuevocamino = new Arista(ciudadagregarv, ciudadconectarv, distanciaentreciudades);
-    if (InterfaceFunctions.getGrafo().isVertex(ciudadagregarv) == true) {
+    distanciaentreciudades = Double.parseDouble(distancia.getText());
+    if (distanciaentreciudades!=0 && distanciaentreciudades>0){
 
-        InterfaceFunctions.getGrafo().agregarArista(nuevocamino);
-        Messages.information("La ciudad fue agregada con exito");
-        CiudadesComboBox.removeAllItems();
-        agregarCiudadB.setEnabled(true);
-        ciudadnueva.setText("");
-        distancia.setText("");
-        InterfaceFunctions.VolverMenu();
+        int numCiudad= Integer.parseInt(ciudadnueva.getText());
+
+        if (InterfaceFunctions.getGrafo().buscarVertice2(numCiudad)==null){
+            
+            Vertice nuevoVertice = new Vertice(numCiudad);
+            InterfaceFunctions.getGrafo().agregarVertice(nuevoVertice);
+
+            ciudadagregar = ciudadnueva.getText().toString();
+            int ca = Integer.parseInt(ciudadagregar);
+            ciudadagregarv = InterfaceFunctions.getGrafo().buscarVertice2(ca);
+        }else{
+            Messages.error("La ciudad ya existe");
+            agregarCiudadB.setEnabled(true);
+            ciudadnueva.setText("");
+            distancia.setText("");
+            CiudadesComboBox.removeAllItems();
+            InterfaceFunctions.VolverMenu();
+      
+
+
+        }
+        //Creo el camino entre la ciudad nueva y la que quiero conectar
+        Arista nuevocamino = new Arista(ciudadagregarv, ciudadconectarv, distanciaentreciudades);
+        if (InterfaceFunctions.getGrafo().isVertex(ciudadagregarv) == true) {
+
+            InterfaceFunctions.getGrafo().agregarArista(nuevocamino);
+            Messages.information("La ciudad fue agregada con exito");
+            
+            agregarCiudadB.setEnabled(true);
+            ciudadnueva.setText("");
+            distancia.setText("");
+            CiudadesComboBox.removeAllItems();
+            InterfaceFunctions.VolverMenu();
+        } else {
+            Messages.error("La ciudad a agregar ya existe");
+            agregarCiudadB.setEnabled(true);
+            ciudadnueva.setText("");
+            distancia.setText("");
+            CiudadesComboBox.removeAllItems();
+            InterfaceFunctions.VolverMenu();
+        }
+
     } else {
-        Messages.error("La ciudad a agregar ya existe");
-        CiudadesComboBox.removeAllItems();
+        Messages.error("El valor ingresado debe ser un numero");
+        ciudadnueva.setText("");
         agregarCiudadB.setEnabled(true);
         ciudadnueva.setText("");
         distancia.setText("");
-        InterfaceFunctions.VolverMenu();
-    }
-  
-    } catch (Exception e) {
-        Messages.error("El valaor ingresado debe ser un numero");
         CiudadesComboBox.removeAllItems();
-        agregarCiudadB.setEnabled(true);
-        ciudadnueva.setText("");
-        distancia.setText("");
         InterfaceFunctions.VolverMenu();
  
     }
