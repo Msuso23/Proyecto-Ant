@@ -30,7 +30,7 @@ public class FuncionesSistemaHormiga {
     
     public void inicializarFeromonas(Grafo grafo){
     
-    double feromonasIniciales = 1/grafo.getListaCiudades().getSize();
+    double feromonasIniciales = 1.0/grafo.getListaCiudades().getSize();
         for (int i = 0; i < grafo.getListaCiudades().getSize(); i++) {
             Vertice ciudadActual = (Vertice) grafo.getListaCiudades().getValor(i);
             for (int j = 0; j < ciudadActual.getList_ady().getSize(); j++) {

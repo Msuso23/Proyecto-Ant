@@ -93,7 +93,7 @@ public class Vertice {
     
     @Override
     public String toString(){
-        return "Ciudad" + NumeroCiudad;
+        return "Ciudad " + NumeroCiudad;
     }
     
 }
