@@ -9,6 +9,7 @@ import EDD.Grafo;
 import EDD.Lista;
 import EDD.Vertice;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -160,6 +161,7 @@ public class SistemaHormiga {
                 this.recorridoCompleto(hormigaActual);
                 HistorialHormiga historiala = new HistorialHormiga(j, hormigaActual.getCiudadesRecorridas().transformarCiudad(), String.valueOf(hormigaActual.getLongitud()));
                 historialTemporal.insertarFinal(historiala);
+                JOptionPane.showMessageDialog(null, historiala.toStringP());
                 System.out.println(historiala.toStringP());
             }
             Historial historial2 = new Historial(titulo, historialTemporal.Transformar(), this.recorridoOptimo.transformarCiudad(), this.distanciaOptima);            
@@ -168,6 +170,7 @@ public class SistemaHormiga {
             this.reiniciarHormigas();
             this.historialTemporal.vaciar();
             
+            JOptionPane.showMessageDialog(null, "La distancia optima es: "+distanciaOptima);
         }
     }
 
@@ -223,15 +226,6 @@ public class SistemaHormiga {
         }
     }
 
-    /**
-     * Calcula las probabilidades asociadas a cada arista en la lista de
-     * ciudades candidatas. Permite determinar la probabilidad de elección de un
-     * camino u otro.
-     *
-     * @param ciudadesCandidatas La lista de ciudades candidatas.
-     * @return Una lista de probabilidades asociadas a cada arista en la lista
-     * de ciudades candidatas.
-     */
     public Lista probabilidades(Lista ciudadesCandidatas) {
         Lista probsindividir = new Lista();
 
@@ -273,9 +267,8 @@ public class SistemaHormiga {
         return aristaFinal;
     }
 
-    /**
-     * Reinicia el estado de todas las hormigas al inicio del recorrido.
-     */
+    
+    //Reinicia el estado de todas las hormigas al inicio del recorrido.
     public void reiniciarHormigas() {
         for (int i = 0; i < this.hormigas.getSize(); i++) {
             Hormiga hormigaActual = (Hormiga) this.hormigas.getValor(i);
@@ -286,9 +279,8 @@ public class SistemaHormiga {
         }
     }
 
-    /**
-     * Evapora las feromonas en todas las aristas del grafo.
-     */
+    
+    //Evapora las feromonas en todas las aristas del grafo.
     public void evaporacionFeromonas() {
         // arista verificar si destino > origen
         for (int i = 0; i < grafo.getListaCiudades().getSize(); i++) {
@@ -303,11 +295,8 @@ public class SistemaHormiga {
         }
     }
 
-    /**
-     * Incrementa las feromonas en las aristas recorridas por la hormiga.
-     *
-     * @param hormiga La hormiga a utilizar en el recorrido completo.
-     */
+    
+    //Incrementa las feromonas en las aristas recorridas por la hormiga.
     public void incrementarFeromonas(Hormiga hormiga) {
         double visibilidad = (double) q / hormiga.getLongitud();
 
@@ -330,6 +319,19 @@ public class SistemaHormiga {
         }
         return historialCompleto;
     }
-        
+      
+    
+    public StringBuilder reco (){
+        StringBuilder caminoOptimo = new StringBuilder("Camino óptimo: ");
+        for (int i = 0; i < recorridoOptimo.getSize(); i++) {
+            Vertice ciudad = (Vertice) recorridoOptimo.getValor(i);
+            caminoOptimo.append(ciudad.getNumeroCiudad()); // O podrías usar otro identificador de la ciudad, dependiendo de cómo estén definidos tus vértices
+            if (i < recorridoOptimo.getSize() - 1) {
+                caminoOptimo.append(" -> ");
+           
+            }
+         }
+        return caminoOptimo;
+    }
             
 }

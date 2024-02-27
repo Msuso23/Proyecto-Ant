@@ -80,13 +80,11 @@ public class AgregarCiudad extends javax.swing.JFrame {
         jPanel3.add(ciudadnueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 150, 30));
 
         nombreciudad.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        nombreciudad.setForeground(new java.awt.Color(0, 0, 0));
         nombreciudad.setText(" ");
         jPanel3.add(nombreciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Ciudad a agregar");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
@@ -100,10 +98,10 @@ public class AgregarCiudad extends javax.swing.JFrame {
         jPanel3.add(agregarCiudadB, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 150, -1));
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Ciudad a la que se conecta");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
+        CiudadesComboBox.setBackground(new java.awt.Color(0, 0, 0));
         CiudadesComboBox.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         CiudadesComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +129,6 @@ public class AgregarCiudad extends javax.swing.JFrame {
         jPanel3.add(distancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Distancia");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
 
@@ -199,11 +196,20 @@ public class AgregarCiudad extends javax.swing.JFrame {
 
     
     //Guardo el valor de distancia entre ciudades
-    distanciaentreciudades = Double.parseDouble(distancia.getText());
+    try{
+        distanciaentreciudades = Double.parseDouble(distancia.getText());
+        ciudadconecta.setEnabled(false);
+    }catch(Exception e){
+        Messages.error("La distancia debe ser un numero");
+        distancia.setText("");
+        ciudadconecta.setEnabled(true);
+        
+    }
+  
     if (distanciaentreciudades!=0 && distanciaentreciudades>0){
 
         int numCiudad= Integer.parseInt(ciudadnueva.getText());
-
+        
         if (InterfaceFunctions.getGrafo().buscarVertice2(numCiudad)==null){
             
             Vertice nuevoVertice = new Vertice(numCiudad);
@@ -212,6 +218,20 @@ public class AgregarCiudad extends javax.swing.JFrame {
             ciudadagregar = ciudadnueva.getText().toString();
             int ca = Integer.parseInt(ciudadagregar);
             ciudadagregarv = InterfaceFunctions.getGrafo().buscarVertice2(ca);
+            
+             //Creo el camino entre la ciudad nueva y la que quiero conectar
+            Arista nuevocamino = new Arista(ciudadagregarv, ciudadconectarv, distanciaentreciudades);
+            if (InterfaceFunctions.getGrafo().isVertex(ciudadagregarv) == true) {
+
+            InterfaceFunctions.getGrafo().agregarArista(nuevocamino);
+            Messages.information("La ciudad fue agregada con exito");
+
+            agregarCiudadB.setEnabled(true);
+            ciudadnueva.setText("");
+            distancia.setText("");
+            CiudadesComboBox.removeAllItems();
+            InterfaceFunctions.VolverMenu();
+        } 
         }else{
             Messages.error("La ciudad ya existe");
             agregarCiudadB.setEnabled(true);
@@ -219,33 +239,12 @@ public class AgregarCiudad extends javax.swing.JFrame {
             distancia.setText("");
             CiudadesComboBox.removeAllItems();
             InterfaceFunctions.VolverMenu();
-      
-
-
         }
-        //Creo el camino entre la ciudad nueva y la que quiero conectar
-        Arista nuevocamino = new Arista(ciudadagregarv, ciudadconectarv, distanciaentreciudades);
-        if (InterfaceFunctions.getGrafo().isVertex(ciudadagregarv) == true) {
-
-            InterfaceFunctions.getGrafo().agregarArista(nuevocamino);
-            Messages.information("La ciudad fue agregada con exito");
-            
-            agregarCiudadB.setEnabled(true);
-            ciudadnueva.setText("");
-            distancia.setText("");
-            CiudadesComboBox.removeAllItems();
-            InterfaceFunctions.VolverMenu();
-        } else {
-            Messages.error("La ciudad a agregar ya existe");
-            agregarCiudadB.setEnabled(true);
-            ciudadnueva.setText("");
-            distancia.setText("");
-            CiudadesComboBox.removeAllItems();
-            InterfaceFunctions.VolverMenu();
-        }
+        
+       
 
     } else {
-        Messages.error("El valor ingresado debe ser un numero");
+        Messages.error("Vuelva a intentarlo");
         ciudadnueva.setText("");
         agregarCiudadB.setEnabled(true);
         ciudadnueva.setText("");
@@ -293,6 +292,8 @@ public class AgregarCiudad extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AgregarCiudad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

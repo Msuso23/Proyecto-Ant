@@ -40,7 +40,7 @@ public class HistorialHormiga {
     }
     
     public String toStringP() {
-        return "numHormiga:" + numHormiga + ", camino Recorrido: " + caminoRecorrido + ", longitud Recorrida=" + longitudRecorrido;
+        return "numHormiga: " + numHormiga + ", camino Recorrido: " + caminoRecorrido + ", longitud Recorrida=" + longitudRecorrido;
     }
     
 }
