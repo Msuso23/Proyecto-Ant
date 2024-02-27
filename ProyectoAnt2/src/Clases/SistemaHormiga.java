@@ -223,15 +223,6 @@ public class SistemaHormiga {
         }
     }
 
-    /**
-     * Calcula las probabilidades asociadas a cada arista en la lista de
-     * ciudades candidatas. Permite determinar la probabilidad de elección de un
-     * camino u otro.
-     *
-     * @param ciudadesCandidatas La lista de ciudades candidatas.
-     * @return Una lista de probabilidades asociadas a cada arista en la lista
-     * de ciudades candidatas.
-     */
     public Lista probabilidades(Lista ciudadesCandidatas) {
         Lista probsindividir = new Lista();
 
@@ -273,9 +264,8 @@ public class SistemaHormiga {
         return aristaFinal;
     }
 
-    /**
-     * Reinicia el estado de todas las hormigas al inicio del recorrido.
-     */
+    
+    //Reinicia el estado de todas las hormigas al inicio del recorrido.
     public void reiniciarHormigas() {
         for (int i = 0; i < this.hormigas.getSize(); i++) {
             Hormiga hormigaActual = (Hormiga) this.hormigas.getValor(i);
@@ -286,9 +276,8 @@ public class SistemaHormiga {
         }
     }
 
-    /**
-     * Evapora las feromonas en todas las aristas del grafo.
-     */
+    
+    //Evapora las feromonas en todas las aristas del grafo.
     public void evaporacionFeromonas() {
         // arista verificar si destino > origen
         for (int i = 0; i < grafo.getListaCiudades().getSize(); i++) {
@@ -303,11 +292,8 @@ public class SistemaHormiga {
         }
     }
 
-    /**
-     * Incrementa las feromonas en las aristas recorridas por la hormiga.
-     *
-     * @param hormiga La hormiga a utilizar en el recorrido completo.
-     */
+    
+    //Incrementa las feromonas en las aristas recorridas por la hormiga.
     public void incrementarFeromonas(Hormiga hormiga) {
         double visibilidad = (double) q / hormiga.getLongitud();
 
