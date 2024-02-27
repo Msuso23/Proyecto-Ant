@@ -9,6 +9,7 @@ import EDD.Grafo;
 import EDD.Lista;
 import EDD.Vertice;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -160,6 +161,7 @@ public class SistemaHormiga {
                 this.recorridoCompleto(hormigaActual);
                 HistorialHormiga historiala = new HistorialHormiga(j, hormigaActual.getCiudadesRecorridas().transformarCiudad(), String.valueOf(hormigaActual.getLongitud()));
                 historialTemporal.insertarFinal(historiala);
+                JOptionPane.showMessageDialog(null, historiala.toStringP());
                 System.out.println(historiala.toStringP());
             }
             Historial historial2 = new Historial(titulo, historialTemporal.Transformar(), this.recorridoOptimo.transformarCiudad(), this.distanciaOptima);            
@@ -168,6 +170,7 @@ public class SistemaHormiga {
             this.reiniciarHormigas();
             this.historialTemporal.vaciar();
             
+            JOptionPane.showMessageDialog(null, "La distancia optima es: "+distanciaOptima);
         }
     }
 
@@ -316,6 +319,19 @@ public class SistemaHormiga {
         }
         return historialCompleto;
     }
-        
+      
+    
+    public StringBuilder reco (){
+        StringBuilder caminoOptimo = new StringBuilder("Camino óptimo: ");
+        for (int i = 0; i < recorridoOptimo.getSize(); i++) {
+            Vertice ciudad = (Vertice) recorridoOptimo.getValor(i);
+            caminoOptimo.append(ciudad.getNumeroCiudad()); // O podrías usar otro identificador de la ciudad, dependiendo de cómo estén definidos tus vértices
+            if (i < recorridoOptimo.getSize() - 1) {
+                caminoOptimo.append(" -> ");
+           
+            }
+         }
+        return caminoOptimo;
+    }
             
 }

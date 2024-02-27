@@ -316,7 +316,7 @@ public class Lista {
             JOptionPane.showMessageDialog(null, "La lista esta vacia");
         }
     }
-   
+       
 }
 
 
