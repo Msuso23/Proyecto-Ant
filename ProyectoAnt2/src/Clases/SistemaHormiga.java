@@ -158,13 +158,16 @@ public class SistemaHormiga {
             for (int j = 0; j < hormigas.getSize(); j++) {
                 Hormiga hormigaActual = (Hormiga) hormigas.getValor(j);
                 this.recorridoCompleto(hormigaActual);
-                HistorialHormiga historial = new HistorialHormiga(j, hormigaActual.getCiudadesRecorridas().transformarCiudad(), String.valueOf(hormigaActual.getLongitud()));
-                historialTemporal.insertarFinal(historial);
+                HistorialHormiga historiala = new HistorialHormiga(j, hormigaActual.getCiudadesRecorridas().transformarCiudad(), String.valueOf(hormigaActual.getLongitud()));
+                historialTemporal.insertarFinal(historiala);
+                System.out.println(historiala.toStringP());
             }
-            Historial historial2 = new Historial(titulo, historialTemporal.Transformar(), this.recorridoOptimo.transformarCiudad(), this.distanciaOptima);            this.historial.insertarFinal(historial2);
+            Historial historial2 = new Historial(titulo, historialTemporal.Transformar(), this.recorridoOptimo.transformarCiudad(), this.distanciaOptima);            
+            this.historial.insertarFinal(historial2);
             this.evaporacionFeromonas();
             this.reiniciarHormigas();
             this.historialTemporal.vaciar();
+            
         }
     }
 
@@ -178,7 +181,11 @@ public class SistemaHormiga {
                     Lista probs = probabilidades(ciudadesCandidatas);
                     Arista arista = decidirCiudad(probs, ciudadesCandidatas);
                     hormiga.visitarCiudad(arista.getCiudadDestino().getNumeroCiudad(), arista.getDistancia());
+                }else{
+                    break;
                 }
+            }else{
+                break;
             }
         }
 
@@ -195,6 +202,8 @@ public class SistemaHormiga {
 
         this.incrementarFeromonas(hormiga);
     }
+    
+    
 
     public Lista ciudadesCandidatas(Hormiga hormiga) {
 
@@ -300,7 +309,7 @@ public class SistemaHormiga {
      * @param hormiga La hormiga a utilizar en el recorrido completo.
      */
     public void incrementarFeromonas(Hormiga hormiga) {
-        double visibilidad = q / hormiga.getLongitud();
+        double visibilidad = (double) q / hormiga.getLongitud();
 
         for (int i = 0; i < hormiga.getCiudadesRecorridas().getSize() - 1; i++) {
             Vertice ciudadActual = (Vertice) hormiga.getCiudadesRecorridas().getValor(i);
@@ -311,6 +320,16 @@ public class SistemaHormiga {
         }
     }
 
+    //Se encarga de pasar el historial de lista a string
+    public String toStringHistorial(){
+        String historialCompleto = "";
+        for (int i = 0; i <this.historial.getSize(); i++) {
+            Historial historial = (Historial) this.historial.getValor(i);
+            historialCompleto += historial.toString() + ("\n");
+                
+        }
+        return historialCompleto;
+    }
+        
+            
 }
-  
-  

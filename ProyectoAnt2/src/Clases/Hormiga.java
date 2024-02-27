@@ -4,6 +4,7 @@ package Clases;
 import EDD.Lista;
 import EDD.Arista;
 import EDD.Vertice;
+import Interfaces.InterfaceFunctions;
 import javax.swing.JOptionPane;
 
 /**
@@ -62,14 +63,14 @@ public class Hormiga {
     public void visitarCiudad(int NumeroCiudad, double distancia){
         if (ciudadActual.buscarArista2(NumeroCiudad)!=null){
             if (!this.visitado(NumeroCiudad)){
-            Arista arista = ciudadActual.buscarArista2(NumeroCiudad);
-            this.setCiudadActual(arista.getCiudadDestino());
-            longitud += arista.getDistancia();
-            CiudadesRecorridas.insertarFinal(NumeroCiudad);
-            JOptionPane.showMessageDialog(null, "Listo");
-        }else{
+                Arista arista = ciudadActual.buscarArista2(NumeroCiudad);
+                this.setCiudadActual(arista.getCiudadDestino());
+                longitud += arista.getDistancia();
+                Vertice ciudadVisitada = InterfaceFunctions.getGrafo().buscarVertice2(NumeroCiudad);
+                CiudadesRecorridas.insertarFinal(ciudadVisitada);
+            }else{
             JOptionPane.showMessageDialog(null, "Ya visitaste esta ciudad.");
-        }
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Las ciudades no se encuentran conectadas");
         }        

@@ -39,6 +39,9 @@ public class HistorialHormiga {
         this.longitudRecorrido = longitudRecorrido;
     }
     
+    public String toStringP() {
+        return "numHormiga:" + numHormiga + ", camino Recorrido: " + caminoRecorrido + ", longitud Recorrida=" + longitudRecorrido;
+    }
     
 }
 
